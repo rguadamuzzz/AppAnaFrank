@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Resuena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Añadir Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <style>
+        /* [Todo el código CSS anterior permanece igual] */
+        /* Paleta de Colores y Estilos Generales */
+        :root {
+            --bg-light-navbar: #fdf6ec; 
+            --container-bg: #F8EDE9;
+            --border-color: #8B5E3C;
+            --text-dark: #4C2F27;
+            --text-medium: #6C584C;
+            --accent-pink: #D6A48D;
+            --accent-red: #a63c2b;
+            --accent-yellow: #C1997F;
+            --accent-green: #22232B;
+            --accent-orange: #f1d7b6;
+            --button-main: #a63c2b;
+            --button-hover: #822e22;
+            --list-bg: #F8F4F0;
+            --placeholder-color: #D1B3A4;
+            --nav-text-color: #333;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-light-navbar);
+            color: var(--text-dark);
+            font-family: Arial, sans-serif;
+        }
+        
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-top: 50px; /* Espacio para separar del nav */
+            min-height: calc(100vh - 120px);
+        }
+        
+        /* --- NAVBAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 30px;
+            margin: 20px auto 0 auto; 
+            width: 90%;
+            max-width: 1200px;
+            
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--nav-text-color);
+        }
+
+        .logo img {
+            width: 20px;
+            height: 20px;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 14px;
+            color: var(--nav-text-color);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-red);
+        }
+
+        /* Buscador */
+        .search {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 5px 10px;
+        }
+
+        .search input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: transparent;
+            color: var(--nav-text-color);
+        }
+
+        /* Botón contacto */
+        .btn-contacto {
+            background-color: var(--accent-orange);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--nav-text-color);
+        }
+
+        .btn-contacto:hover {
+            background-color: #e6cba8;
+        }
+
+        /* --- Contenedor del Diario --- */
+        .diary-container {
+            background-color: var(--container-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 750px;
+            padding: 40px;
+            border: 3px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            transition: transform 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .diary-container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- Encabezados y Títulos del Diario --- */
+        .header-diary {
+            text-align: center;
+            border-bottom: 2px solid var(--placeholder-color);
+            padding-bottom: 20px;
+        }
+
+        .header-diary h1 {
+            color: var(--text-dark);
+            font-size: 3.5em;
+            margin: 0 0 5px;
+        }
+
+        .header-diary p {
+            color: var(--text-medium);
+            font-style: italic;
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        /* --- Secciones Interactivas --- */
+        .entry-section, .stories-section {
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            background-color: var(--list-bg);
+        }
+
+        .entry-section h2 {
+            color: var(--accent-pink);
+            font-size: 2em;
+            margin: 0 0 15px;
+            text-align: center;
+        }
+
+        .stories-section h2 {
+            color: var(--accent-yellow);
+            font-size: 2em;
+            margin: 0 0 15px;
+            text-align: center;
+        }
+
+        /* --- Inputs y Textarea --- */
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], textarea {
+            flex-grow: 1;
+            padding: 15px;
+            border: 1px solid var(--placeholder-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1.1em;
+            color: var(--text-dark);
+            background-color: #FFF;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--border-color);
+            box-shadow: 0 0 8px rgba(139, 94, 60, 0.4);
+        }
+
+        input[type="text"]::placeholder, textarea::placeholder {
+            color: var(--placeholder-color);
+            font-style: italic;
+        }
+        
+        textarea {
+            height: 200px;
+            resize: vertical;
+        }
+
+        /* --- Botones --- */
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: -5px;
+        }
+        
+        .button {
+            background-color: var(--button-main);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: inherit;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        /* --- Lista de Historias --- */
+        .stories-list {
+            height: 250px;
+            overflow-y: auto;
+            border: 1px solid var(--placeholder-color);
+            border-radius: 8px;
+            background-color: #FFF;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .stories-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .stories-list::-webkit-scrollbar-thumb {
+            background-color: var(--accent-red);
+            border-radius: 10px;
+        }
+
+        .story-item {
+            background-color: var(--list-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--placeholder-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .story-item:hover {
+            background-color: var(--bg-light-navbar);
+            border-color: var(--accent-green);
+        }
+
+        .story-item.active {
+            background-color: var(--accent-orange);
+            color: var(--nav-text-color);
+            border-color: var(--border-color);
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story-item.active h3, .story-item.active p {
+            color: var(--nav-text-color);
+        }
+
+        .story-item h3 {
+            margin: 0 0 5px;
+            font-size: 1.4em;
+            color: var(--text-dark);
+        }
+
+        .story-item p {
+            margin: 0;
+            font-size: 1em;
+            color: var(--text-medium);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--placeholder-color);
+            font-style: italic;
+            padding: 20px;
+        }
+        
+        /* Nuevos estilos para indicador de carga */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-medium);
+        }
+        
+        .anonymous-badge {
+            font-size: 0.8em;
+            color: var(--accent-red);
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+        <img src="img/logo.jpeg" alt="Logo">
+            Querida Kitty
+        </div>
+        <nav>
+            <a href="#">INICIO</a>
+            <a href="#">MI DIARIO</a>
+            <a href="#">EXPLORA</a>
+            <a href="#">HISTORIA VIVA</a>
+            <a href="#">EQUIPO</a>
+            <a href="#">CONTACTO</a>
+        </nav>
+        <div class="search">
+            <input type="text" placeholder="Buscar...">
+        </div>
+        <button class="btn-contacto">CONTÁCTANOS</button>
+    </header>
+
+    <div class="main-content">
+        <div class="diary-container">
+            <header class="header-diary">
+                <h1>Mi Diario Secreto</h1>
+                <p>Un espacio para tus pensamientos...</p>
+            </header>
+
+            <section class="entry-section">
+                <h2>Cuenta tu historia...</h2>
+                <div class="input-group">
+                    <input type="text" id="entry-title" placeholder="Escribe el título aquí">
+                </div>
+                <textarea id="diary-text" placeholder="¿Qué tienes en mente hoy?"></textarea>
+                <div class="button-group">
+                    <button class="button" id="clear-button">Borrar</button>
+                    <button class="button" id="save-button">Guardar</button>
+                </div>
+            </section>
+
+            <section class="stories-section">
+                <h2>Otras historias</h2>
+                <div class="input-group">
+                    <input type="text" id="search-input" placeholder="Buscar historias por título o contenido...">
+                </div>
+                <div class="stories-list" id="stories-list">
+                    <div class="loading">Cargando historias...</div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de Firebase (reemplaza con tu configuración)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBL2QE3z9uSLKHvgVmEzZyYObXeXc2khUM",
+            authDomain: "ana-frank-4112b.firebaseapp.com",
+            databaseURL: "https://ana-frank-4112b-default-rtdb.firebaseio.com",
+            projectId: "ana-frank-4112b",
+            storageBucket: "ana-frank-4112b.firebasestorage.app",
+            messagingSenderId: "309455694601",
+            appId: "1:309455694601:web:a7f44063d6345b215bc1d8"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        // Referencias a elementos del DOM
+        const entryTitleInput = document.getElementById('entry-title');
+        const diaryTextarea = document.getElementById('diary-text');
+        const saveButton = document.getElementById('save-button');
+        const clearButton = document.getElementById('clear-button');
+        const searchInput = document.getElementById('search-input');
+        const storiesList = document.getElementById('stories-list');
+        
+        // Cargar historias desde Firestore
+        function loadStories() {
+            storiesList.innerHTML = '<div class="loading">Cargando historias...</div>';
+            
+            db.collection("publicStories")
+                .orderBy("date", "desc")
+                .limit(20)
+                .get()
+                .then((querySnapshot) => {
+                    const stories = [];
+                    querySnapshot.forEach((doc) => {
+                        stories.push({ id: doc.id, ...doc.data() });
+                    });
+                    renderStories(stories);
+                })
+                .catch((error) => {
+                    console.error("Error cargando historias: ", error);
+                    storiesList.innerHTML = '<p class="empty-state">Error al cargar las historias. Intenta nuevamente.</p>';
+                });
+        }
+        
+        // Función para buscar historias
+        function searchStories() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query === "") {
+                loadStories();
+                return;
+            }
+            
+            storiesList.innerHTML = '<div class="loading">Buscando historias...</div>';
+            
+            // Buscar en título
+            db.collection("publicStories")
+                .orderBy("title")
+                .startAt(query)
+                .endAt(query + '\uf8ff')
+                .get()
+                .then((titleSnapshot) => {
+                    const stories = [];
+                    titleSnapshot.forEach((doc) => {
+                        stories.push({ id: doc.id, ...doc.data() });
+                    });
+                    
+                    // También buscar en contenido
+                    db.collection("publicStories")
+                        .orderBy("content")
+                        .startAt(query)
+                        .endAt(query + '\uf8ff')
+                        .get()
+                        .then((contentSnapshot) => {
+                            contentSnapshot.forEach((doc) => {
+                                // Evitar duplicados
+                                if (!stories.some(story => story.id === doc.id)) {
+                                    stories.push({ id: doc.id, ...doc.data() });
+                                }
+                            });
+                            renderStories(stories);
+                        })
+                        .catch((error) => {
+                            console.error("Error buscando en contenido: ", error);
+                            renderStories(stories);
+                        });
+                })
+                .catch((error) => {
+                    console.error("Error buscando en títulos: ", error);
+                    storiesList.innerHTML = '<p class="empty-state">Error en la búsqueda. Intenta nuevamente.</p>';
+                });
+        }
+        
+        // Función para renderizar las historias
+        function renderStories(stories) {
+            storiesList.innerHTML = '';
+            
+            if (stories.length === 0) {
+                storiesList.innerHTML = '<p class="empty-state">No se encontraron historias. ¡Sé el primero en compartir!</p>';
+                return;
+            }
+            
+            stories.forEach((story) => {
+                const item = document.createElement('div');
+                item.classList.add('story-item');
+                
+                const displayDate = new Date(story.date.seconds * 1000).toLocaleDateString('es-ES', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                });
+                
+                item.innerHTML = `
+                    <h3>${story.title}</h3>
+                    <p>${displayDate}</p>
+                    <div class="anonymous-badge">Publicación anónima</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    // Al hacer clic en una historia, mostrar el contenido en un modal o alerta
+                    showStoryContent(story);
+                });
+                
+                storiesList.appendChild(item);
+            });
+        }
+        
+        // Función para mostrar el contenido completo de una historia
+        function showStoryContent(story) {
+            const displayDate = new Date(story.date.seconds * 1000).toLocaleDateString('es-ES', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            alert(`Título: ${story.title}\n\nFecha: ${displayDate}\n\nHistoria:\n${story.content}\n\n--- Publicación anónima ---`);
+        }
+        
+        // Guardar una nueva historia
+        function saveEntry() {
+            const title = entryTitleInput.value.trim();
+            const content = diaryTextarea.value.trim();
+
+            if (!title || !content) {
+                alert('Por favor, ingresa un título y el contenido de tu historia para guardarla.');
+                return;
+            }
+
+            // Guardar en Firestore
+            db.collection("publicStories").add({
+                title: title,
+                content: content,
+                date: new Date()
+            })
+            .then(() => {
+                alert('¡Tu historia ha sido publicada de forma anónima!');
+                entryTitleInput.value = '';
+                diaryTextarea.value = '';
+                
+                // Recargar la lista de historias
+                loadStories();
+            })
+            .catch((error) => {
+                console.error("Error guardando historia: ", error);
+                alert('Error al publicar tu historia. Intenta nuevamente.');
+            });
+        }
+
+        function clearEntry() {
+            if (confirm('¿Estás seguro de que quieres borrar el texto actual?')) {
+                entryTitleInput.value = '';
+                diaryTextarea.value = '';
+            }
+        }
+
+        // Event listeners
+        saveButton.addEventListener('click', saveEntry);
+        clearButton.addEventListener('click', clearEntry);
+        searchInput.addEventListener('input', searchStories);
+        
+        // Cargar historias al iniciar
+        document.addEventListener('DOMContentLoaded', loadStories);
+    </script>
+
+</body>
+</html>S
