@@ -1,0 +1,54 @@
+/* Permitir que las flechas se vean fuera */
+#carouselExampleIndicators {
+  max-width: 1000px; /* ajusta ancho en escritorio */
+  margin: 80px auto 0 auto; /* 🔹 margen superior para separar del navbar */
+  overflow: visible; /* para que las flechas no se recorten */
+}
+
+/* Flechas fuera del contenedor */
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto; /* ancho mínimo para flechas */
+}
+
+.carousel-control-prev {
+  left: -60px; /* Ajusta según necesites */
+}
+
+.carousel-control-next {
+  right: -60px; /* Ajusta según necesites */
+}
+
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0L4.5.75 1.25 4l3.25 3.25.75-.75L2.75 4l2.5-2.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0L2 0.75 5.25 4 2 7.25l.75.75L6 4 2.75 0z'/%3E%3C/svg%3E");
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  #carouselExampleIndicators {
+    max-width: 100%;
+    margin-top: 70px; /* un poco menos en pantallas medianas */
+  }
+  .carousel-control-prev {
+    left: -40px;
+  }
+  .carousel-control-next {
+    right: -40px;
+  }
+}
+
+@media (max-width: 576px) {
+  #carouselExampleIndicators {
+    margin-top: 60px; /* aún menos en pantallas pequeñas */
+  }
+  .carousel-control-prev {
+    left: -30px;
+  }
+  .carousel-control-next {
+    right: -30px;
+  }
+}
