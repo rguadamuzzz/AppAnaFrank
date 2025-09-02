@@ -4,6 +4,95 @@
   margin: 80px auto 0 auto; /* 🔹 margen superior para separar del navbar */
   overflow: visible; /* para que las flechas no se recorten */
 }
+/* --- NAVBAR --- */
+:root {
+    --bg-light-navbar: #fdf6ec; 
+    --accent-red: #a63c2b;
+    --accent-orange: #f1d7b6;
+    --nav-text-color: #333;
+}
+
+/* Resto de estilos del navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    margin: 20px auto 0 auto; 
+    width: 90%;
+    max-width: 1200px;
+    
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--nav-text-color);
+}
+
+.logo img {
+    width: 20px;
+    height: 20px;
+}
+
+nav {
+    display: flex;
+    gap: 18px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--nav-text-color);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-red);
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.search input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    color: var(--nav-text-color);
+}
+
+.btn-contacto {
+    background-color: var(--accent-orange);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--nav-text-color);
+}
+
+.btn-contacto:hover {
+    background-color: #e6cba8;
+}
 
 /* Flechas fuera del contenedor */
 .carousel-control-prev,
