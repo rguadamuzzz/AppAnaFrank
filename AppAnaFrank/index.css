@@ -52,3 +52,50 @@
     right: -30px;
   }
 }
+
+/* Para que todas las cards tengan la misma altura */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Hace que el contenido ocupe todo el espacio y empuja el botón hacia abajo */
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empuja el botón hacia abajo sin importar el texto */
+.card-body button {
+  margin-top: auto;
+}
+
+/* Estilo para el botón */
+/* Botones principal y secundario con mismo color */
+.btn-primary,
+.btn-secondary {
+  background-color: #C1997F !important;  /* color beige */
+  border-color: #C1997F !important;
+  color: white !important;                /* texto blanco */
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: none;                        /* sin sombra extra */
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  background-color: #D1B3A4 !important;    /* hover más claro */
+  transform: translateY(-0.5px);          /* movimiento sutil */
+  box-shadow: none;
+}
+
+/* Quita outline azul al hacer focus */
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
