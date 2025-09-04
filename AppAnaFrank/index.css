@@ -196,4 +196,7 @@ nav a:hover {
   box-shadow: none;
 }
 
-
+/* Ajusta el modal para que no se superponga con el navbar */
+.modal-dialog {
+  margin-top: 100px; /* Cambia este valor según la altura de tu navbar */
+}
