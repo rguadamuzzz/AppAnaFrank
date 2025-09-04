@@ -31,6 +31,11 @@ header {
     z-index: 10;
 }
 
+body {
+  background-color: #FDF6EC;
+}
+
+
 .logo {
     font-weight: bold;
     font-size: 18px;
@@ -92,6 +97,10 @@ nav a:hover {
 
 .btn-contacto:hover {
     background-color: #e6cba8;
+}
+
+.carousel {
+  background-color: #FDF6EC;
 }
 
 /* Flechas fuera del contenedor */
