@@ -1,0 +1,257 @@
+This note is high-level documentation for the core parts of this template project.
+All events in this project are commented, so you can open any event and read the comments to understand what it does, and how it works.
+
+
+# OBJECTS
+
+There are 26 objects within this project
+
+obj_arrow_left
+	UI object used in the main menu to lower the difficulty
+	
+	Left Pressed		Moves the difficulty down by one stage
+	
+obj_arrow_right
+	UI object used in the main menu to raise the difficulty
+	
+	Left Pressed		Moves the difficulty up by one stage
+	
+obj_button_base
+	UI object that acts as a parent to other buttons for categorisation
+	
+obj_button_home
+	UI object that moves the game back to the main menu
+	
+	Left Pressed		Moves the game back to the main menu room
+	
+obj_button_next
+	UI object that moves the game to the next room
+
+	Left Pressed		Moves the game to the next room
+	
+obj_button_quit
+	UI object that quits the game or moves the game back to the main menu room depending on where in the game flow it is
+	
+	Create				If this is the first room in the game (AKA the main menu) change the button's sprite
+	Left Pressed		If this is the first room in the game, quit the game. Otherwise, move the game back to the main menu
+	
+obj_button_redo
+	UI object that redoes the most recently undone move
+	
+	Create				Sets the image index to the unavailable version of the sprite
+	Left Pressed		Finds the current place in the most recent list of moves and performs that move again
+	
+obj_button_replay
+	UI object that restarts the room so the player can play the same difficulty puzzle again
+	
+	Left Pressed		Restarts the current room
+	
+obj_button_resume
+	UI Object that lets the player resume the game by destroying the quitting sequence
+	
+	Create				If this is the first room in the game (AKA the main menu) change the button's sprite
+	Left Pressed		Destroy all objects in the quit sequence
+	
+obj_button_undo
+	UI object that undoes the most recent move
+	
+	Create				Changes the image index to show that no moves can be undone
+	Left Pressed		Finds the current place in the most recent list of moves and undoes the previous move
+	
+obj_exit_button
+	UI object that creates a sequence depending on the current place in the game
+	
+	Left Pressed		If this is the first room in the game (AKA the main menu), create a quit menu. Otherwise, create a pause menu.
+	
+obj_game_size
+	UI object that displays the current selected difficulty
+	
+	Step				Change the sprite depending on the current selected game size/difficulty
+	
+obj_play_button
+	UI object that starts the gameplay
+	
+	Left Pressed		Move to a different game room depending on the selected difficulty
+	
+obj_board
+	Game object that holds all the tiles and game logic
+	
+	Create				Create all the tiles, create a list to hold each instance of a tile being moved, and randomly shuffle the tiles within the board
+	End Step			Check to see if the puzzle has been solved yet by seeing if each the tile in each position is correct
+	
+obj_confetti_manager
+	Game object that creates confetti
+	
+	Create				Create the confetti after a short pause
+	
+obj_edge
+	Game object that blocks tile move
+	
+obj_full_image
+	Game object that fades into view to show the completed image
+	
+	Create				Set the image as invisible
+	Step				If the puzzle has been completed, make the image more visible
+	
+obj_grid_3
+	Game object that divides the tiles into a 3x3 grid
+	
+	Step				If the puzzle is complete, become more invisible
+	
+obj_grid_4
+	Game object that divides the tiles into a 4x4 grid
+	
+	Step				If the puzzle is complete, become more invisible
+	
+obj_grid_5
+	Game object that divides the tiles into a 5x5 grid
+	
+	Step				If the puzzle is complete, become more invisible
+	
+obj_grid_parent
+	Game object to act as a parent for the other grids and provide them with visibility functionality
+	
+	Step				If the puzzle is complete, become more invisible
+	
+obj_main_menu
+	Object that sets out the most important variables in the game's menu system
+	
+	Create				Marks that this is the main menu and that the game difficulty is at 3x3
+	Step				If the game size/difficulty has been set to a number higher than the highest the game offers, reset it to the lowest and vice versa
+	
+obj_menu_exit
+	UI object that acts as a background for popups
+	
+	Create				If this is the first room in the game (AKA the main menu), change the sprite index
+	Draw				Draw a background and then draw this object as a menu
+	
+obj_move_counter
+	UI object that shows how many moves the player has made
+	
+	Create				Sets the move count to 0
+	Draw				Shows how many moves the player has made
+
+obj_tile
+	Game object that shows a part of the whole image and can be moved around within the grid
+	
+	Left Pressed		Finds if there is a space for this tile to move to and moves it if there is
+	
+obj_timer
+	UI object that shows how long the player has taken to solve the puzzle
+	
+	Create				Sets the timer to 0
+	Step				Adds the time between frames to the timer
+	Draw				Shows how long the timer has been running
+
+# PARTICLE SYSTEMS
+
+ps_confetti_left
+	Explosion of confetti up and to the right for when the game is won
+
+ps_confetti_right
+	Explosion of confetti up and to the left for when the game is won
+
+# ROOMS
+
+There are 4 rooms in this project
+
+rm_3x3
+	The lowest difficulty puzzle room
+	
+	Confetti			Instance layer for the confetti particale system
+	GUI					Instance layer for menus that need to be above the gameplay
+	Instances			Instance layer for all the board elements like the tiles and grid
+	Assets_1			Asset layer for a background to the grid
+	Background			Background layer so the room has a non-void background
+
+rm_4x4
+	The medium difficulty puzzle room
+
+	Confetti			Instance layer for the confetti particale system
+	GUI					Instance layer for menus that need to be above the gameplay
+	Instances			Instance layer for all the board elements like the tiles and grid
+	Assets_1			Asset layer for a background to the grid
+	Background			Background layer so the room has a non-void background
+	
+rm_5x5
+	The highest difficulty puzzle room
+
+	Confetti			Instance layer for the confetti particale system
+	GUI					Instance layer for menus that need to be above the gameplay
+	Instances			Instance layer for all the board elements like the tiles and grid
+	Assets_1			Asset layer for a background to the grid
+	Background			Background layer so the room has a non-void background
+
+rm_menu
+	The main menu room
+	
+	GUI					Instance layer for menus that need to be above everything else
+	Instances			Instance layer for pre-existing menu buttons
+	Assets_1			Asset layer for main menu sprites
+	Background			Background layer so the room has a non-void background
+
+# SCRIPTS
+
+GridMoveValue
+	Holds a function to move tiles' position in a ds_grid
+	
+	grid_move_value		change a tile's x and y value in a ds_grid
+	
+MoveTile
+	Holds a function to move tiles in the game grid
+	
+	move_tile			Moves a tile from one position to another in game space
+
+# SEQUENCES
+
+There are 4 sequences within this project
+
+seq_pause
+	Sequence that plays when the player pauses the game
+
+seq_quit
+	Sequence that plays when the player wants to quit
+
+seq_template_complete
+	Sequence that plays when the player has completed the template
+
+seq_win
+	Sequence that plays when the player has completed a puzzle
+	
+# SOUNDS
+
+There are 8 sound files within this project
+
+They are organised by their type
+	Music
+		Played in the background (often looped)
+	SFX
+		Called when needed in game
+	
+# SPRITES
+
+There are 39 sprites in this project
+
+They are organised by their use
+	Backgrounds
+		Room background sprites
+	Buttons
+		Sprites used for buttons in UI like difficulty selection the undo/redo buttons
+	InGame
+		Tiles
+			Composite sprites where each frame is a different tile in the image
+		Sprites used in general gameplay such as the grids and the cannons that appear when the game is won
+	Menus
+		Miscellaneous menu sprites that aren't interactable like the title, and menu backgrounds
+
+~~ Possible Edits! ~~
+
+If you want to edit parts of this project to make it more unique and personal feel free to!
+
+Why not try:
+	- Implementing a new image to build puzzles from
+	- Creating a 6x6 grid puzzle
+	- Creating a hint system
+	- Or use this as an idea of how to make your own game from scratch!
+
+Don't forget to share what you make to gx.games so others can play your game too!
