@@ -99,6 +99,57 @@ nav a:hover {
     background-color: #e6cba8;
 }
 
+/*--titulo--*/
+.header-container {
+  padding: 20px; 
+  margin-top: 20px; /* Espacio entre navbar y título */
+}
+
+/*--Título e Intro--*/
+.header-container {
+  padding: 20px; 
+  margin-top: 20px; /* Espacio entre navbar y título */
+  text-align: center; /* Centra todo el contenido */
+  /* Línea vertical eliminada */
+}
+
+.header-container h1.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #8B5E3C;
+  margin-bottom: 1px; /* Espacio mínimo con el siguiente contenido */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-block; /* Línea solo bajo el texto */
+  border-bottom: 2px solid #867b7b; /* Línea debajo del título */
+  padding-bottom: 2px;
+}
+
+.header-container p.intro {
+  font-size: 1.3rem;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 10px; /* Espacio entre título e intro */
+  margin-left: auto; 
+  margin-right: auto; /* Centra el párrafo */
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 15px;
+  }
+
+  .header-container h1.title {
+    font-size: 2rem;
+  }
+
+  .header-container p.intro {
+    font-size: 1rem;
+  }
+}
+
+
 .carousel {
   background-color: #FDF6EC;
 }
@@ -199,4 +250,100 @@ nav a:hover {
 /* Ajusta el modal para que no se superponga con el navbar */
 .modal-dialog {
   margin-top: 100px; /* Cambia este valor según la altura de tu navbar */
+}
+
+/* Citas */
+/*--Sección de Quotes basada en la paleta--*/
+.quotes-section {
+  background-color: var(--accent-yellow, #e0c1ad); /* fondo más oscuro */
+  padding: 60px 30px;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 80px auto 40px auto; /* más separación arriba y abajo */
+  text-align: center;
+  position: relative;
+}
+
+.quotes-title {
+  font-family: 'Georgia', serif; /* título elegante */
+  font-size: 34px; /* más grande */
+  font-weight: 700;
+  color: var(--text-dark, #4C2F27); /* color del título */
+  margin-bottom: 30px; /* mayor separación del carrusel */
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  display: inline-block;
+  border-bottom: 3px solid var(--accent-pink, #D6A48D); /* línea debajo del título */
+  padding-bottom: 8px; /* separación entre texto y línea */
+}
+
+/* Wrapper del carrusel */
+.carousel-wrapper {
+  position: relative;
+}
+
+.quotes-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  padding-bottom: 20px; /* más espacio para que los cards no estén pegados a la barra */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.quote-card {
+  flex: 0 0 300px;
+  background-color: var(--bg-light-navbar, #fdf6ec); /* cards más claras */
+  padding: 35px; /* más espacio interno */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  color: var(--text-medium, #6C584C); /* color del texto */
+  line-height: 1.6;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* Botones del carrusel */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255,255,255,0.85);
+  border: none;
+  font-size: 34px;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: #6C584C; /* hover de la paleta */
+}
+
+.left-btn { left: -20px; }
+.right-btn { right: -20px; }
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+  .quote-card { flex: 0 0 260px; font-size: 17px; padding: 28px; }
+  .quotes-title { font-size: 30px; }
+}
+
+@media screen and (max-width: 600px) {
+  .quote-card { flex: 0 0 200px; font-size: 16px; padding: 22px; }
+  .quotes-title { font-size: 26px; }
+}
+
+@media screen and (max-width: 400px) {
+  .quote-card { flex: 0 0 160px; font-size: 14px; padding: 18px; }
+  .quotes-title { font-size: 22px; }
 }
