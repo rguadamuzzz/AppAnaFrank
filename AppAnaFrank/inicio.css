@@ -1,0 +1,95 @@
+body {
+  background-color: #fff8ea !important;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  padding: 2.5rem 2.5rem;      
+  border-radius: 40px;      
+  margin: 15px auto;      
+  width: 95%;               
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: #f1e5cd !important;
+}
+
+.navbar-nav .nav-link {
+  margin: 2px 40px;        
+  font-size: 1.3rem;      
+  font-weight: 500;     
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.hero-text p {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.btn-conocenos {
+  margin-top: 25px;
+  padding: 10px 25px;
+  border-radius: 20px;
+  background-color: #b23b2d;
+  color: white;
+  border: none;
+}
+
+.btn-conocenos:hover {
+  background-color: #922f23;
+}
+
+.hero-img img {
+  max-width: 300px;
+  height: auto;
+}
+
+footer {
+  background-color: #111;
+  color: #ffffff;
+  padding: 40px 20px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+footer a:hover {
+  color: #ff99c8;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  font-size: 20px;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #ff99c8;
+}
+
+.footer-bottom {
+  background-color: #222;
+  color: #bbb;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+  font-size: 14px;
+}
