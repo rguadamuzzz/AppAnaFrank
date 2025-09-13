@@ -389,3 +389,106 @@ footer a:hover {
   margin-top: 20px;
   font-size: 14px;
 }
+
+:root {
+  --quotes-bg: #d4ae72;        
+  --quotes-title: #12190f;     
+  --quote-card-bg: rgba(253, 246, 236, 0.9);   
+  --quote-card-text: #12190f;  
+  --quote-accent: #996a3e;     
+  --btn-bg: #813916;           
+  --btn-hover-bg: #000000;    
+  --btn-text: #ffffff;         
+}
+
+/* 🎤 Sección */
+.quotes-section {
+  background-image: url("holocausto.jpg");
+background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
+
+  padding: 70px 20px;
+  text-align: center;
+  border-top: 5px solid var(--quote-accent);
+  border-bottom: 5px solid var(--quote-accent);
+}
+
+
+.quotes-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: var(--quotes-title);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+
+.quotes-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+
+.quote-card {
+  min-width: 100%;
+  background: var(--quote-card-bg);
+  color: var(--quote-card-text);
+  font-size: 20px;
+  font-style: italic;
+  padding: 35px;
+  margin: 0 15px;
+  border-radius: 16px;
+  border-left: 6px solid var(--quote-accent);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  line-height: 1.6;
+  position: relative;
+}
+
+
+.quote-card::before {
+  content: "“";
+  font-size: 50px;
+  color: var(--quote-accent);
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  opacity: 0.3;
+}
+
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 14px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background: var(--btn-hover-bg);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.left-btn {
+  left: 15px;
+}
+
+.right-btn {
+  right: 15px;
+}
