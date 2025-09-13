@@ -4,13 +4,7 @@
   margin: 80px auto 0 auto; /* 🔹 margen superior para separar del navbar */
   overflow: visible; /* para que las flechas no se recorten */
 }
-/* --- NAVBAR --- */
-:root {
-    --bg-light-navbar: #fdf6ec; 
-    --accent-red: #a63c2b;
-    --accent-orange: #f1d7b6;
-    --nav-text-color: #333;
-}
+
 
 /* Resto de estilos del navbar */
 header {
@@ -21,84 +15,96 @@ header {
     margin: 20px auto 0 auto; 
     width: 90%;
     max-width: 1200px;
-    
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 10;
-}
 
+    /* 🔹 Quitar caja blanca/redondeada */
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
 body {
-  background-color: #FDF6EC;
+   background: #fff8ec !important;
+   font-family: Arial, sans-serif; 
+}
+
+.navbar {
+  padding: 2.5em 2.5rem;      
+  border-radius: 40px;      
+  margin: 15px auto;      
+  width: 95%;               
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.navbar-nav .nav-link {
+  margin: 2px 40px;        
+  font-size: 1.4rem;      
+  font-weight: 500;     
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+}
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.hero-text p {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #444;
 }
 
 
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #222;
+}
+.nav-logo img {
+  width: 28px;
+  height: 28px;
+}
 
 
-.logo {
-    font-weight: bold;
-    font-size: 18px;
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #d30c0c;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #f8f9fa;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 200px;
+  }
+  .nav-links.active {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--nav-text-color);
-}
-
-.logo img {
-    width: 20px;
-    height: 20px;
-}
-
-nav {
-    display: flex;
-    gap: 18px;
-}
-
-nav a {
-    text-decoration: none;
-    font-size: 14px;
-    color: var(--nav-text-color);
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent-red);
-}
-
-.search {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
-    padding: 5px 10px;
-}
-
-.search input {
-    border: none;
-    outline: none;
-    font-size: 14px;
-    background: transparent;
-    color: var(--nav-text-color);
-}
-
-.btn-contacto {
-    background-color: var(--accent-orange);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    color: var(--nav-text-color);
-}
-
-.btn-contacto:hover {
-    background-color: #e6cba8;
+  }
+  .menu-toggle {
+    display: block;
+  }
 }
 
 /*--titulo--*/
@@ -348,4 +354,38 @@ nav a:hover {
 @media screen and (max-width: 400px) {
   .quote-card { flex: 0 0 160px; font-size: 14px; padding: 18px; }
   .quotes-title { font-size: 22px; }
+}
+footer {
+  background-color: #111;
+  color: #ffffff;
+  padding: 40px 20px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+footer a:hover {
+  color: #ff99c8;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  font-size: 20px;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #ff99c8;
+}
+
+.footer-bottom {
+  background-color: #222;
+  color: #bbb;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+  font-size: 14px;
 }
