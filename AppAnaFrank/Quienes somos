@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiénes Somos</title>
+  <link rel="stylesheet" href="quienes-somos.css">
+</head>
+<body>
+
+<div class="main-content">
+  <div class="diary-container quienes-somos">
+    <header class="header-diary">
+      <h1>Quiénes Somos</h1>
+      <p>El equipo detrás de <strong>Querida Kitty</strong></p>
+    </header>
+
+    <section class="about-section">
+      <h2>¿Quiénes Somos?</h2>
+      <p>
+        Somos un grupo de chicas apasionadas que buscamos contar la historia de Ana Frank desde una perspectiva
+        fresca, cercana y significativa. Nuestro proyecto no solo quiere rescatar la memoria de Ana, sino también
+        crear un espacio de aprendizaje y reflexión en el que más jóvenes puedan sentirse identificados.
+      </p>
+      <p>
+        Creemos que la historia no debe quedarse en los libros, sino cobrar vida a través de experiencias digitales
+        que inspiren empatía, fortalezcan la autoestima y generen un sentido de comunidad. Con este proyecto
+        queremos demostrar que, incluso en los momentos más oscuros, la voz de una persona puede traer esperanza,
+        unión y valentía.
+      </p>
+      <p>
+        Nuestro propósito es que los chicos y chicas de hoy encuentren en estas páginas no solo la historia de Ana
+        Frank, sino también una guía para enfrentar sus propios desafíos. Queremos que cada visitante se sienta
+        acompañado, que descubra herramientas emocionales y que comprenda que su voz también tiene poder para
+        transformar el mundo.
+      </p>
+    </section>
+
+    <section class="team-section">
+      <h2>Nuestro Equipo</h2>
+      <div class="team-cards">
+        <div class="team-card">
+          <img src="img/team1.jpg" alt="Integrante 1">
+          <h3>Integrante 1</h3>
+          <p>Rol o función en el proyecto.</p>
+        </div>
+        <div class="team-card">
+          <img src="img/team2.jpg" alt="Integrante 2">
+          <h3>Integrante 2</h3>
+          <p>Rol o función en el proyecto.</p>
+        </div>
+        <div class="team-card">
+          <img src="img/team3.jpg" alt="Integrante 3">
+          <h3>Integrante 3</h3>
+          <p>Rol o función en el proyecto.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+</body>
+</html>
+
+<style>
+/* --- QUIÉNES SOMOS --- */
+
+.quienes-somos {
+    max-width: 900px;
+    background-color: var(--crema);
+    border: 2px solid var(--vino);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+.about-section {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--texto);
+    background: var(--beige);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 6px solid var(--vino);
+    margin-bottom: 40px;
+    text-align: justify;
+}
+
+.team-section {
+    margin-top: 40px;
+}
+
+.team-section h2 {
+    text-align: center;
+    font-size: 2em;
+    color: var(--vino);
+    margin-bottom: 20px;
+}
+
+.team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.team-card {
+    background: var(--rosado);
+    border: 2px solid var(--vino);
+    border-radius: 15px;
+    width: 220px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    background: var(--marron);
+    color: white;
+}
+
+.team-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.team-card h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: var(--vino-oscuro);
+}
+
+.team-card p {
+    margin-top: 8px;
+    font-size: 0.95em;
+    color: var(--texto);
+}
+
+.team-card:hover h3,
+.team-card:hover p {
+    color: white;
+}
+
+.header-diary h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: var(--vino-oscuro);
+    margin-bottom: 25px;
+}
+
+/* Variables de color */
+:root {
+    --crema: #fffbea;
+    --vino: #87201f;
+    --vino-oscuro: #521a11;
+    --beige: #f1e5cd;
+    --rosado: #dabdb9;
+    --marron: #996a3e;
+    --texto: #2c2c2c;
+    --text-medium: #555555;
+    --text-dark: #222222;
+    --accent-red: #87201f;
+    --list-bg: #f9f9f9;
+    --placeholder-color: #cccccc;
+}
+</style>
