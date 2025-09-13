@@ -1,0 +1,482 @@
+/* Permitir que las flechas se vean fuera */
+#carouselExampleIndicators {
+  max-width: 1000px; /* ajusta ancho en escritorio */
+  margin: 80px auto 0 auto; /* 🔹 margen superior para separar del navbar */
+  overflow: visible; /* para que las flechas no se recorten */
+}
+
+
+/* Resto de estilos del navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    margin: 20px auto 0 auto; 
+    width: 90%;
+    max-width: 1200px;
+
+    /* 🔹 Quitar caja blanca/redondeada */
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+body {
+   background: #fff8ec !important;
+   font-family: Arial, sans-serif; 
+}
+
+body {
+  background: #fff8ec !important;
+  font-family: Arial, sans-serif; 
+}
+
+/* Navbar */
+.navbar {
+  padding: 2.5em 2.5rem;      
+  border-radius: 40px;      
+  margin: 15px auto;      
+  width: 95%;               
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.navbar-nav .nav-link {
+  margin: 2px 40px;        
+  font-size: 1.4rem;      
+  font-weight: 500;     
+}
+
+/* Logo dentro del navbar */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #222;
+}
+
+.nav-logo img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #d30c0c;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #f8f9fa;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 200px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
+/*--titulo--*/
+.header-container {
+  padding: 20px; 
+  margin-top: 20px; /* Espacio entre navbar y título */
+}
+
+/*--Título e Intro--*/
+.header-container {
+  padding: 20px; 
+  margin-top: 20px; /* Espacio entre navbar y título */
+  text-align: center; /* Centra todo el contenido */
+  /* Línea vertical eliminada */
+}
+
+.header-container h1.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #8B5E3C;
+  margin-bottom: 1px; /* Espacio mínimo con el siguiente contenido */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-block; /* Línea solo bajo el texto */
+  border-bottom: 2px solid #867b7b; /* Línea debajo del título */
+  padding-bottom: 2px;
+}
+
+.header-container p.intro {
+  font-size: 1.3rem;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 10px; /* Espacio entre título e intro */
+  margin-left: auto; 
+  margin-right: auto; /* Centra el párrafo */
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 15px;
+  }
+
+  .header-container h1.title {
+    font-size: 2rem;
+  }
+
+  .header-container p.intro {
+    font-size: 1rem;
+  }
+}
+
+
+.carousel {
+  background-color: #FDF6EC;
+}
+
+/* Flechas fuera del contenedor */
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto; /* ancho mínimo para flechas */
+}
+
+.carousel-control-prev {
+  left: -60px; /* Ajusta según necesites */
+}
+
+.carousel-control-next {
+  right: -60px; /* Ajusta según necesites */
+}
+
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0L4.5.75 1.25 4l3.25 3.25.75-.75L2.75 4l2.5-2.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0L2 0.75 5.25 4 2 7.25l.75.75L6 4 2.75 0z'/%3E%3C/svg%3E");
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  #carouselExampleIndicators {
+    max-width: 100%;
+    margin-top: 70px; /* un poco menos en pantallas medianas */
+  }
+  .carousel-control-prev {
+    left: -40px;
+  }
+  .carousel-control-next {
+    right: -40px;
+  }
+}
+
+@media (max-width: 576px) {
+  #carouselExampleIndicators {
+    margin-top: 60px; /* aún menos en pantallas pequeñas */
+  }
+  .carousel-control-prev {
+    left: -30px;
+  }
+  .carousel-control-next {
+    right: -30px;
+  }
+}
+
+/* Para que todas las cards tengan la misma altura */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Hace que el contenido ocupe todo el espacio y empuja el botón hacia abajo */
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empuja el botón hacia abajo sin importar el texto */
+.card-body button {
+  margin-top: auto;
+}
+
+/* Estilo para el botón */
+/* Botones principal y secundario con mismo color */
+.btn-primary,
+.btn-secondary {
+  background-color: #C1997F !important;  /* color beige */
+  border-color: #C1997F !important;
+  color: white !important;                /* texto blanco */
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: none;                        /* sin sombra extra */
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  background-color: #D1B3A4 !important;    /* hover más claro */
+  transform: translateY(-0.5px);          /* movimiento sutil */
+  box-shadow: none;
+}
+
+/* Quita outline azul al hacer focus */
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Ajusta el modal para que no se superponga con el navbar */
+.modal-dialog {
+  margin-top: 100px; /* Cambia este valor según la altura de tu navbar */
+}
+
+/* Citas */
+/*--Sección de Quotes basada en la paleta--*/
+.quotes-section {
+  background-color: var(--accent-yellow, #e0c1ad); /* fondo más oscuro */
+  padding: 60px 30px;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 80px auto 40px auto; /* más separación arriba y abajo */
+  text-align: center;
+  position: relative;
+}
+
+.quotes-title {
+  font-family: 'Georgia', serif; /* título elegante */
+  font-size: 34px; /* más grande */
+  font-weight: 700;
+  color: var(--text-dark, #4C2F27); /* color del título */
+  margin-bottom: 30px; /* mayor separación del carrusel */
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  display: inline-block;
+  border-bottom: 3px solid var(--accent-pink, #D6A48D); /* línea debajo del título */
+  padding-bottom: 8px; /* separación entre texto y línea */
+}
+
+/* Wrapper del carrusel */
+.carousel-wrapper {
+  position: relative;
+}
+
+.quotes-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  padding-bottom: 20px; /* más espacio para que los cards no estén pegados a la barra */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.quote-card {
+  flex: 0 0 300px;
+  background-color: var(--bg-light-navbar, #fdf6ec); /* cards más claras */
+  padding: 35px; /* más espacio interno */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  color: var(--text-medium, #6C584C); /* color del texto */
+  line-height: 1.6;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* Botones del carrusel */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255,255,255,0.85);
+  border: none;
+  font-size: 34px;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: #6C584C; /* hover de la paleta */
+}
+
+.left-btn { left: -20px; }
+.right-btn { right: -20px; }
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+  .quote-card { flex: 0 0 260px; font-size: 17px; padding: 28px; }
+  .quotes-title { font-size: 30px; }
+}
+
+@media screen and (max-width: 600px) {
+  .quote-card { flex: 0 0 200px; font-size: 16px; padding: 22px; }
+  .quotes-title { font-size: 26px; }
+}
+
+@media screen and (max-width: 400px) {
+  .quote-card { flex: 0 0 160px; font-size: 14px; padding: 18px; }
+  .quotes-title { font-size: 22px; }
+}
+footer {
+  background-color: #111;
+  color: #ffffff;
+  padding: 40px 20px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+footer a:hover {
+  color: #ff99c8;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  font-size: 20px;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #ff99c8;
+}
+
+.footer-bottom {
+  background-color: #222;
+  color: #bbb;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+:root {
+  --quotes-bg: #d4ae72;        
+  --quotes-title: #12190f;     
+  --quote-card-bg: rgba(253, 246, 236, 0.9);   
+  --quote-card-text: #12190f;  
+  --quote-accent: #996a3e;     
+  --btn-bg: #813916;           
+  --btn-hover-bg: #000000;    
+  --btn-text: #ffffff;         
+}
+
+/* 🎤 Sección */
+.quotes-section {
+  background-image: url("holocausto.jpg");
+background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
+
+  padding: 70px 20px;
+  text-align: center;
+  border-top: 5px solid var(--quote-accent);
+  border-bottom: 5px solid var(--quote-accent);
+}
+
+
+.quotes-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: var(--quotes-title);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+
+.quotes-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+
+.quote-card {
+  min-width: 100%;
+  background: var(--quote-card-bg);
+  color: var(--quote-card-text);
+  font-size: 20px;
+  font-style: italic;
+  padding: 35px;
+  margin: 0 15px;
+  border-radius: 16px;
+  border-left: 6px solid var(--quote-accent);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  line-height: 1.6;
+  position: relative;
+}
+
+
+.quote-card::before {
+  content: "“";
+  font-size: 50px;
+  color: var(--quote-accent);
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  opacity: 0.3;
+}
+
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 14px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background: var(--btn-hover-bg);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.left-btn {
+  left: 15px;
+}
+
+.right-btn {
+  right: 15px;
+}
