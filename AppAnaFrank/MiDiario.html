@@ -3,468 +3,520 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Resuena</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Paleta de Colores y Estilos Generales */
-        :root {
-            --bg-light-navbar: #fdf6ec; 
-            --container-bg: #F8EDE9;
-            --border-color: #8B5E3C;
-            --text-dark: #4C2F27;
-            --text-medium: #6C584C;
-            --accent-pink: #D6A48D;
-            --accent-red: #a63c2b;
-            --accent-yellow: #C1997F;
-            --accent-green: #22232B;
-            --accent-orange: #f1d7b6;
-            --button-main: #a63c2b;
-            --button-hover: #822e22;
-            --list-bg: #F8F4F0;
-            --placeholder-color: #D1B3A4;
-            --nav-text-color: #333;
-        }
-
-        body {
-            margin: 0;
-            background-color: var(--bg-light-navbar);
-            color: var(--text-dark);
-            font-family: Arial, sans-serif;
-        }
-        
-        .main-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            padding-top: 50px; /* Espacio para separar del nav */
-            min-height: calc(100vh - 120px);
-        }
-        
-        /* --- NAVBAR --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 30px;
-            margin: 20px auto 0 auto; 
-            width: 90%;
-            max-width: 1200px;
-            
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-weight: bold;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--nav-text-color);
-        }
-
-        .logo img {
-            width: 20px;
-            height: 20px;
-        }
-
-        nav {
-            display: flex;
-            gap: 18px;
-        }
-
-        nav a {
-            text-decoration: none;
-            font-size: 14px;
-            color: var(--nav-text-color);
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--accent-red);
-        }
-
-        /* Buscador */
-        .search {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 20px;
-            padding: 5px 10px;
-        }
-
-        .search input {
-            border: none;
-            outline: none;
-            font-size: 14px;
-            background: transparent;
-            color: var(--nav-text-color);
-        }
-
-        /* Botón contacto */
-        .btn-contacto {
-            background-color: var(--accent-orange);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            color: var(--nav-text-color);
-        }
-
-        .btn-contacto:hover {
-            background-color: #e6cba8;
-        }
-
-        /* --- Contenedor del Diario --- */
-        .diary-container {
-            background-color: var(--container-bg);
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            width: 90%;
-            max-width: 750px;
-            padding: 40px;
-            border: 3px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            transition: transform 0.3s ease;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .diary-container:hover {
-            transform: translateY(-5px);
-        }
-
-        /* --- Encabezados y Títulos del Diario --- */
-        .header-diary {
-            text-align: center;
-            border-bottom: 2px solid var(--placeholder-color);
-            padding-bottom: 20px;
-        }
-
-        .header-diary h1 {
-            color: var(--text-dark);
-            font-size: 3.5em;
-            margin: 0 0 5px;
-        }
-
-        .header-diary p {
-            color: var(--text-medium);
-            font-style: italic;
-            margin: 0;
-            font-size: 1.2em;
-        }
-
-        /* --- Secciones Interactivas --- */
-        .entry-section, .stories-section {
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-            background-color: var(--list-bg);
-        }
-
-        .entry-section h2 {
-            color: var(--accent-pink);
-            font-size: 2em;
-            margin: 0 0 15px;
-            text-align: center;
-        }
-
-        .stories-section h2 {
-            color: var(--accent-yellow);
-            font-size: 2em;
-            margin: 0 0 15px;
-            text-align: center;
-        }
-
-        /* --- Inputs y Textarea --- */
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"], textarea {
-            flex-grow: 1;
-            padding: 15px;
-            border: 1px solid var(--placeholder-color);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1.1em;
-            color: var(--text-dark);
-            background-color: #FFF;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus, textarea:focus {
-            outline: none;
-            border-color: var(--border-color);
-            box-shadow: 0 0 8px rgba(139, 94, 60, 0.4);
-        }
-
-        input[type="text"]::placeholder, textarea::placeholder {
-            color: var(--placeholder-color);
-            font-style: italic;
-        }
-        
-        textarea {
-            height: 200px;
-            resize: vertical;
-        }
-
-        /* --- Botones --- */
-        .button-group {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: -5px;
-        }
-        
-        .button {
-            background-color: var(--button-main);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-family: inherit;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .button:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-2px);
-        }
-
-        /* --- Lista de Historias --- */
-        .stories-list {
-            height: 250px;
-            overflow-y: auto;
-            border: 1px solid var(--placeholder-color);
-            border-radius: 8px;
-            background-color: #FFF;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .stories-list::-webkit-scrollbar {
-            width: 8px;
-        }
-        .stories-list::-webkit-scrollbar-thumb {
-            background-color: var(--accent-red);
-            border-radius: 10px;
-        }
-
-        .story-item {
-            background-color: var(--list-bg);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--placeholder-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .story-item:hover {
-            background-color: var(--bg-light-navbar);
-            border-color: var(--accent-green);
-        }
-
-        .story-item.active {
-            background-color: var(--accent-orange);
-            color: var(--nav-text-color);
-            border-color: var(--border-color);
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .story-item.active h3, .story-item.active p {
-            color: var(--nav-text-color);
-        }
-
-        .story-item h3 {
-            margin: 0 0 5px;
-            font-size: 1.4em;
-            color: var(--text-dark);
-        }
-
-        .story-item p {
-            margin: 0;
-            font-size: 1em;
-            color: var(--text-medium);
-        }
-
-        .empty-state {
-            text-align: center;
-            color: var(--placeholder-color);
-            font-style: italic;
-            padding: 20px;
-        }
-    </style>
+    <title>Mi Diario Personal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Archivo CSS personalizado -->
+    <link rel="stylesheet" href="MiDiario.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-        <img src="img/logo.jpeg" alt="Logo">
-            Querida Kitty
-        </div>
-        <nav>
-            <a href="#">INICIO</a>
-            <a href="#">MI DIARIO</a>
-            <a href="#">EXPLORA</a>
-            <a href="#">HISTORIA VIVA</a>
-            <a href="#">EQUIPO</a>
-            <a href="#">CONTACTO</a>
-        </nav>
-        <div class="search">
-            <input type="text" placeholder="Buscar...">
-        </div>
-        <button class="btn-contacto">CONTÁCTANOS</button>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fw-bold">
+    <img src="img/logo_ana_frank-removebg-preview.png" href="inicio.html" alt="Logo" width="40" height="40" class="d-inline-block align-text-top ms-4">
+    
+    <a class="navbar-brand font-weight-bold" href="inicio.html">Querida Kitty</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-5">
+        <a class="nav-item nav-link active" href="inicio.html">Inicio</a>
+        <a class="nav-item nav-link" href="#">Mi Diario</a>
+        <a class="nav-item nav-link" href="#">Explora</a>
+        <a class="nav-item nav-link" href="#">Historia Viva</a>
+        <a class="nav-item nav-link" href="equipo.html">Amigas de Ana Frank</a>
+      </div>
+    </div>
+  </nav>
+ 
+  <head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
 
-    <div class="main-content">
-        <div class="diary-container">
-            <header class="header-diary">
-                <h1>Mi Diario Secreto</h1>
-                <p>Un espacio para tus pensamientos...</p>
-            </header>
 
-            <section class="entry-section">
-                <h2>Cuenta tu historia...</h2>
-                <div class="input-group">
-                    <input type="text" id="entry-title" placeholder="Escribe el título aquí">
-                </div>
-                <textarea id="diary-text" placeholder="¿Qué tienes en mente hoy?"></textarea>
-                <div class="button-group">
-                    <button class="button" id="clear-button">Borrar</button>
-                    <button class="button" id="save-button">Guardar</button>
-                </div>
-            </section>
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
 
-            <section class="stories-section">
-                <h2>Tus historias</h2>
-                <div class="input-group">
-                    <input type="text" id="search-input" placeholder="Buscar historias por título o contenido...">
-                </div>
-                <div class="stories-list" id="stories-list">
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+
+    <script src="https://cdn.jsdelivzr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <div class="main-container container-fluid my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg">
+                    <div class="card-header">
+                        <h1 class="h3 mb-1">Mi Diario Personal</h1>
+                        <p class="mb-0 fs-6">Un espacio para tus pensamientos...</p>
                     </div>
-            </section>
+                    <div class="card-body">
+                        <form id="diaryForm">
+                            <input type="hidden" id="entryId">
+                            <div class="mb-4">
+                                <label for="diaryEntry" class="form-label text-muted">¿Qué hay en tu corazón hoy?</label>
+                                <p class="lead" id="emotionPrompt">Elige una emoción para tu entrada...</p>
+                                <div class="emotion-selector" id="emotionSelector">
+                                    <button type="button" class="emotion-btn" data-emotion="alegre" data-emoji="😊" aria-label="Emoción: Feliz">
+                                        😊<br><span class="emotion-label">Feliz</span>
+                                    </button>
+                                    <button type="button" class="emotion-btn" data-emotion="triste" data-emoji="😥" aria-label="Emoción: Triste">
+                                        😥<br><span class="emotion-label">Triste</span>
+                                    </button>
+                                    <button type="button" class="emotion-btn" data-emotion="enojado" data-emoji="😡" aria-label="Emoción: Enojado">
+                                        😡<br><span class="emotion-label">Enojado</span>
+                                    </button>
+                                    <button type="button" class="emotion-btn" data-emotion="sorprendido" data-emoji="😲" aria-label="Emoción: Sorprendido">
+                                        😲<br><span class="emotion-label">Sorprendido</span>
+                                    </button>
+                                    <button type="button" class="emotion-btn" data-emotion="gratitud" data-emoji="😌" aria-label="Emoción: Calmado">
+                                        🥰<br><span class="emotion-label">Gratitud</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label text-muted">Inspiración (haz clic en una para empezar)</label>
+                                <div class="prompt-container" id="promptContainer">
+                                    <button type="button" class="prompt-btn" data-prompt="¿Qué te dio esperanza hoy?">¿Qué te dio esperanza hoy?</button>
+                                    <button type="button" class="prompt-btn" data-prompt="¿A qué injusticia dijiste ‘no’?">¿A qué injusticia dijiste ‘no’?</button>
+                                    <button type="button" class="prompt-btn" data-prompt="Si pudieras escribirle a tu ‘yo’ de dentro de un año, ¿qué dirías?">Escribe a tu ‘yo’ del futuro.</button>
+                                    <button type="button" class="prompt-btn" data-prompt="¿Qué acto de amabilidad recibiste hoy?">¿Qué acto de amabilidad recibiste?</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1 text-muted d-none" id="writingMessage">✍️ Tu voz importa.</p>
+                                <textarea class="form-control" id="diaryEntry" rows="10" placeholder="Querido diario..."></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Cómo quieres guardar tu entrada</label>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <input class="btn-check" type="radio" name="mode" id="modePublic" value="public" checked>
+                                        <label class="btn btn-outline-dark w-100" for="modePublic">Mural anónimo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="btn-check" type="radio" name="mode" id="modeTimeCapsule" value="capsule">
+                                        <label class="btn btn-outline-dark w-100" for="modeTimeCapsule">Cápsula del tiempo</label>
+                                    </div>
+                                </div>
+
+                                <div id="capsuleDateWrap" class="mt-2 d-none">
+                                    <label class="form-label">Abrir el:</label>
+                                    <input type="date" id="capsuleDate" class="form-control" />
+                                </div>
+
+                                <div class="form-text mt-2">
+                                    Publicaremos anónimamente. No compartas datos personales.
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <span id="rateLimitMessage" class="rate-limit-message d-none">Gracias por compartir. Espera un minuto antes de otra entrada.</span>
+                                <button type="submit" class="btn btn-custom" id="submitBtn">
+                                    <span id="submitBtnText">Compartir</span>
+                                    <span id="submitBtnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <hr class="my-5">
+                        
+                        <h2 class="h4 text-center mb-4">Ecos de la Comunidad (<span id="entryCount">0</span>)</h2>
+                        <div id="diaryEntriesContainer" aria-live="polite">
+                            <div class="loading-spinner">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        const entryTitleInput = document.getElementById('entry-title');
-        const diaryTextarea = document.getElementById('diary-text');
-        const saveButton = document.getElementById('save-button');
-        const clearButton = document.getElementById('clear-button');
-        const searchInput = document.getElementById('search-input');
-        const storiesList = document.getElementById('stories-list');
-        
-        let entries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
-        let activeEntryIndex = -1;
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres eliminar esta entrada? Esta acción es irreversible.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        function renderEntries(filteredEntries = entries) {
-            storiesList.innerHTML = '';
-            if (filteredEntries.length === 0) {
-                storiesList.innerHTML = '<p class="empty-state">Aún no has escrito ninguna historia. ¡Anímate!</p>';
-                return;
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, doc, deleteDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
+
+        // Global variables provided by the canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // --- Firebase Initialization and Auth ---
+        if (!firebaseConfig) {
+            console.error("Firebase config is missing. App cannot be initialized.");
+        }
+
+        const app = firebaseConfig ? initializeApp(firebaseConfig) : null;
+        const db = app ? getFirestore(app) : null;
+        const auth = app ? getAuth(app) : null;
+        let userId = null;
+        
+        const nicknameMap = {
+            'alegre': 'Alma Alegre',
+            'triste': 'Corazón Melancólico',
+            'enojado': 'Corazón Indignado',
+            'sorprendido': 'Espíritu Sorprendido',
+            'calmado': 'Mente Serena',
+            'default': 'Narrador Anónimo'
+        };
+
+        const emotionEmojiMap = {
+            'alegre': '😊',
+            'triste': '😥',
+            'enojado': '😡',
+            'sorprendido': '😲',
+            'calmado': '😌'
+        };
+
+        const adjectives = ['Alma', 'Corazón', 'Espíritu', 'Mente', 'Voz', 'Árbol', 'Río', 'Sol', 'Luna', 'Estrella', 'Flor'];
+        const nouns = ['Sonora', 'Sereno', 'Claro', 'Radiante', 'Silencioso', 'Libre', 'Valiente', 'Sabio', 'Curioso', 'Amable', 'Puro'];
+
+        function generatePseudonym() {
+            const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const noun = nouns[Math.floor(Math.random() * nouns.length)];
+            return `${adj} ${noun}`;
+        }
+        
+        // --- PII Sanitization Function ---
+        function sanitizePII(text){
+            // emails
+            text = text.replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi,'[email oculto]');
+            // teléfonos (varios formatos básicos)
+            text = text.replace(/(\+?\d{1,3})?[\s.-]?\(?\d{2,4}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,4}/g,'[teléfono oculto]');
+            // @handles
+            text = text.replace(/@\w{2,30}/g,'[@usuario]');
+            // direcciones simples (muy conservador)
+            text = text.replace(/\b(calle|av\.?|avenida|#|n°|no\.)\s?[^\n,]{3,}/gi,'[dirección omitida]');
+            return text;
+        }
+
+
+        // Get DOM elements
+        const form = document.getElementById('diaryForm');
+        const entryTextarea = document.getElementById('diaryEntry');
+        const entriesContainer = document.getElementById('diaryEntriesContainer');
+        const entryCountDisplay = document.getElementById('entryCount');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitBtnText = document.getElementById('submitBtnText');
+        const submitBtnSpinner = document.getElementById('submitBtnSpinner');
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const emotionSelector = document.getElementById('emotionSelector');
+        const emotionPrompt = document.getElementById('emotionPrompt');
+        const promptContainer = document.getElementById('promptContainer');
+        const writingMessage = document.getElementById('writingMessage');
+        const rateLimitMessage = document.getElementById('rateLimitMessage');
+        const modeRadios = document.querySelectorAll('input[name="mode"]');
+        const capsuleWrap = document.getElementById('capsuleDateWrap');
+        const capsuleDate = document.getElementById('capsuleDate');
+
+
+        let entryToDeleteId = null;
+        let selectedEmotion = null;
+        let lastSubmit = 0;
+        
+        // --- Event Listeners for UI ---
+        
+        // Toggle time capsule date input
+        modeRadios.forEach(r => r.addEventListener('change', () => {
+            capsuleWrap.classList.toggle('d-none', r.id !== 'modeTimeCapsule' || !r.checked);
+        }));
+
+        emotionSelector.addEventListener('click', (e) => {
+            const button = e.target.closest('.emotion-btn');
+            if (!button) return;
+
+            // Remove 'selected' class from all buttons
+            document.querySelectorAll('.emotion-btn').forEach(btn => btn.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked button
+            button.classList.add('selected');
+            selectedEmotion = button.dataset.emotion;
+            emotionPrompt.textContent = `Has elegido: ${button.querySelector('.emotion-label').textContent}. ¡Adelante!`;
+        });
+        
+        promptContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('.prompt-btn');
+            if (!button) return;
+            entryTextarea.value = button.dataset.prompt + '\n\n';
+            entryTextarea.focus();
+        });
+        
+        entryTextarea.addEventListener('input', () => {
+            if (entryTextarea.value.length > 0) {
+                writingMessage.classList.remove('d-none');
+            } else {
+                writingMessage.classList.add('d-none');
             }
-            filteredEntries.forEach((entry, index) => {
-                const item = document.createElement('div');
-                item.classList.add('story-item');
-                if (index === activeEntryIndex) {
-                    item.classList.add('active');
+        });
+
+        // --- Autosave and Restore Draft ---
+        setInterval(() => {
+            const draft = entryTextarea.value;
+            if (draft) {
+                localStorage.setItem('draft_entry', draft);
+            } else {
+                localStorage.removeItem('draft_entry');
+            }
+        }, 3000);
+
+        const draft = localStorage.getItem('draft_entry');
+        if (draft) {
+            entryTextarea.value = draft;
+            writingMessage.classList.remove('d-none');
+        }
+
+        // --- Firebase Initialization and Auth ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+                initRealtimeListener();
+            } else {
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Firebase auth error:", error);
                 }
-                
-                const displayDate = new Date(entry.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-                
-                item.innerHTML = `
-                    <h3>${entry.title}</h3>
-                    <p>${displayDate}</p>
-                `;
-                item.addEventListener('click', () => {
-                    entryTitleInput.value = entry.title;
-                    diaryTextarea.value = entry.content;
-                    updateActiveItem(index);
+            }
+        });
+
+        // --- Firestore Operations ---
+        function initRealtimeListener() {
+            if (!db) return;
+            const q = query(collection(db, `/artifacts/${appId}/public/data/diary_entries`));
+
+            onSnapshot(q, (snapshot) => {
+                const firestoreEntries = [];
+                snapshot.forEach((doc) => {
+                    firestoreEntries.push({ id: doc.id, ...doc.data() });
                 });
-                storiesList.appendChild(item);
+                
+                const now = Date.now();
+                const visibleEntries = firestoreEntries.filter(e => !e.openAt || (e.openAt.toDate() <= new Date()));
+                
+                // Combine local and Firestore entries for display
+                const allEntries = visibleEntries;
+
+                // Ordenar por fecha de creación en memoria, de más reciente a más antigua
+                allEntries.sort((a, b) => (b.createdAt?.toDate()?.getTime() || b.createdAt) - (a.createdAt?.toDate()?.getTime() || a.createdAt));
+
+                displayEntries(allEntries);
+            }, (error) => {
+                console.error("Error al escuchar Firestore: ", error);
             });
         }
 
-        function updateActiveItem(newIndex) {
-            const items = storiesList.querySelectorAll('.story-item');
-            if (activeEntryIndex !== -1 && items[activeEntryIndex]) {
-                items[activeEntryIndex].classList.remove('active');
-            }
-            activeEntryIndex = newIndex;
-            if (items[activeEntryIndex]) {
-                items[activeEntryIndex].classList.add('active');
+        async function saveEntry(content, entryId) {
+            if (!db || !userId) return;
+            const entriesCollection = collection(db, `/artifacts/${appId}/public/data/diary_entries`);
+
+            submitBtn.disabled = true;
+            submitBtnText.textContent = 'Guardando...';
+            submitBtnSpinner.classList.remove('d-none');
+            
+            // PII sanitization
+            content = sanitizePII(content);
+
+            // Publication mode
+            const mode = (document.querySelector('input[name="mode"]:checked')||{}).value || 'public';
+            const openAt = (mode === 'capsule' && capsuleDate.value) ? new Date(capsuleDate.value) : null;
+
+            try {
+                if (entryId) {
+                    const entryDocRef = doc(db, `/artifacts/${appId}/public/data/diary_entries`, entryId);
+                    await updateDoc(entryDocRef, {
+                        content: content,
+                    });
+                } else {
+                    const nickname = nicknameMap[selectedEmotion] || generatePseudonym();
+                    const entryData = {
+                        content: content,
+                        userId: userId,
+                        emotion: selectedEmotion || 'default',
+                        nickname: nickname,
+                        createdAt: serverTimestamp(),
+                        openAt: openAt,
+                    };
+                    await addDoc(entriesCollection, entryData);
+                }
+            } catch (e) {
+                console.error("Error al guardar la entrada: ", e);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtnText.textContent = 'Compartir';
+                submitBtnSpinner.classList.add('d-none');
             }
         }
 
-        function saveEntry() {
-            const title = entryTitleInput.value.trim();
-            const content = diaryTextarea.value.trim();
+        async function deleteEntry(entryId) {
+            if (!db) return;
+            try {
+                await deleteDoc(doc(db, `/artifacts/${appId}/public/data/diary_entries`, entryId));
+            } catch (e) {
+                console.error("Error al eliminar la entrada: ", e);
+            }
+        }
 
-            if (!title || !content) {
-                alert('Por favor, ingresa un título y el contenido de tu historia para guardarla.');
+        // --- UI Logic ---
+        function timeAgo(date) {
+            if (!date) return '';
+            const seconds = Math.floor((new Date() - date) / 1000);
+            let interval = seconds / 31536000;
+            if (interval > 1) return `Hace ${Math.floor(interval)} año(s)`;
+            interval = seconds / 2592000;
+            if (interval > 1) return `Hace ${Math.floor(interval)} mes(es)`;
+            interval = seconds / 86400;
+            if (interval > 1) return `Hace ${Math.floor(interval)} día(s)`;
+            interval = seconds / 3600;
+            if (interval > 1) return `Hace ${Math.floor(interval)} hora(s)`;
+            interval = seconds / 60;
+            if (interval > 1) return `Hace ${Math.floor(interval)} minuto(s)`;
+            return `Hace ${Math.floor(seconds)} segundo(s)`;
+        }
+
+        function displayEntries(entries) {
+            entriesContainer.innerHTML = '';
+            entryCountDisplay.textContent = entries.length;
+
+            if (entries.length === 0) {
+                entriesContainer.innerHTML = '<p class="text-center text-muted">Sé la primera persona en compartir.</p>';
                 return;
             }
 
-            const newEntry = {
-                title,
-                content,
-                date: new Date().toISOString()
-            };
+            entries.forEach(entry => {
+                const entryCard = document.createElement('div');
+                entryCard.className = 'entry-card';
 
-            entries.unshift(newEntry);
-            localStorage.setItem('diaryEntries', JSON.stringify(entries));
+                const createdAtDate = entry.createdAt ? entry.createdAt.toDate() : new Date();
+                const timeString = timeAgo(createdAtDate);
+                const emotionEmoji = emotionEmojiMap[entry.emotion] || '';
+
+                const isTimeCapsule = entry.openAt && entry.openAt.toDate() > new Date();
+                const contentHtml = isTimeCapsule ? 'Esta entrada es una cápsula del tiempo.' : entry.content;
+                const isMyEntry = entry.userId === userId;
+
+                entryCard.innerHTML = `
+                    <div class="entry-meta">
+                        <small>
+                            <strong>${entry.nickname || 'Anónimo'}</strong>
+                            <span class="text-muted">${isTimeCapsule ? '(Cápsula del tiempo)' : ''}</span>
+                        </small>
+                        <small>${timeString}</small>
+                    </div>
+                    <hr>
+                    <div class="d-flex align-items-center mb-3">
+                         <span class="emotion-icon">${emotionEmoji}</span>
+                    </div>
+                    <p>${contentHtml}</p>
+                    <div class="entry-actions text-end">
+                        ${isMyEntry ? `
+                            <button class="btn btn-warning btn-sm edit-btn" data-id="${entry.id}">Editar</button>
+                            <button class="btn btn-danger btn-sm delete-btn" data-id="${entry.id}">Eliminar</button>
+                        ` : ''}
+                    </div>
+                `;
+                entriesContainer.appendChild(entryCard);
+            });
             
-            entryTitleInput.value = '';
-            diaryTextarea.value = '';
-            alert('¡Tu historia ha sido guardada!');
-            activeEntryIndex = -1;
-            renderEntries();
+            // Add event listeners for edit and delete buttons using event delegation
+            entriesContainer.addEventListener('click', (e) => {
+                const button = e.target;
+                const card = button.closest('.entry-card');
+                if (!card) return;
+                
+                if (button.classList.contains('edit-btn')) {
+                    const id = button.dataset.id;
+                    const entryToEdit = entries.find(entry => entry.id === id);
+                    if (entryToEdit) {
+                        entryTextarea.value = entryToEdit.content;
+                        form.querySelector('#entryId').value = id;
+                        entryTextarea.focus();
+                    }
+                } else if (button.classList.contains('delete-btn')) {
+                    entryToDeleteId = button.dataset.id;
+                    deleteModal.show();
+                }
+            });
         }
-
-        function clearEntry() {
-            if (confirm('¿Estás seguro de que quieres borrar el texto actual?')) {
-                entryTitleInput.value = '';
-                diaryTextarea.value = '';
-                activeEntryIndex = -1;
-                renderEntries();
-            }
-        }
-
-        function searchEntries() {
-            const query = searchInput.value.toLowerCase();
-            const filtered = entries.filter(entry => 
-                entry.title.toLowerCase().includes(query) ||
-                entry.content.toLowerCase().includes(query)
-            );
-            renderEntries(filtered);
-        }
-
-        saveButton.addEventListener('click', saveEntry);
-        clearButton.addEventListener('click', clearEntry);
-        searchInput.addEventListener('input', searchEntries);
         
-        document.addEventListener('DOMContentLoaded', renderEntries);
-    </script>
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (entryToDeleteId) {
+                await deleteEntry(entryToDeleteId);
+                deleteModal.hide();
+                entryToDeleteId = null;
+            }
+        });
 
+
+        // --- Form Submission ---
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const now = Date.now();
+            if (now - lastSubmit < 60000) { // 60 seconds rate limit
+                rateLimitMessage.classList.remove('d-none');
+                setTimeout(() => rateLimitMessage.classList.add('d-none'), 5000);
+                return;
+            }
+
+            const entryText = entryTextarea.value.trim();
+            if (entryText === '') {
+                return;
+            }
+            
+            const entryId = form.querySelector('#entryId').value;
+            await saveEntry(entryText, entryId);
+            
+            // Clear form
+            entryTextarea.value = '';
+            form.querySelector('#entryId').value = '';
+            selectedEmotion = null;
+            document.querySelectorAll('.emotion-btn').forEach(btn => btn.classList.remove('selected'));
+            emotionPrompt.textContent = 'Elige una emoción para tu entrada...';
+            writingMessage.classList.add('d-none');
+            
+            lastSubmit = now;
+        });
+
+    </script>
 </body>
 </html>
