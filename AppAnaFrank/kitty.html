@@ -1,25 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kitty te Pregunta</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Fuente igual que Mi Diario -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos: primero MiDiario, luego Kitty para sobrescribir -->
+  <link rel="stylesheet" href="MiDiario.css">
   <link rel="stylesheet" href="kitty.css">
 </head>
 <body>
-  <div class="container">
-    <div id="quiz-container">
-      <h1> Kitty te Pregunta</h1>
-      <div id="question"></div>
-      <div id="options"></div>
-      <button id="next-btn">Siguiente</button>
-    </div>
-    <div id="result-container" class="hidden">
-      <h2>🎉 Juego terminado 🎉</h2>
-      <p id="score"></p>
-      <button onclick="location.reload()">Jugar de nuevo</button>
+
+  <!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm fw-bold rounded-4">
+  <div class="container-xxl">
+    <a class="navbar-brand d-flex align-items-center" href="inicio.html">
+      <img src="img/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+      <span class="fw-bold" style="color:#5a3a2a;">Querida Kitty</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link px-lg-4" href="inicio.html">Inicio</a>
+        <a class="nav-link px-lg-4" href="MiDiario.html">Mi Diario</a>
+        <a class="nav-link px-lg-4 active" aria-current="page" href="CitaHistoria.html">Historia Viva</a>
+        <a class="nav-link px-lg-4" href="equipo.html">Amigas de Ana Frank</a>
+        <a class="nav-link px-lg-4" href="kitty.html">Kitty te Pregunta</a>
+      </div>
     </div>
   </div>
+</nav>
+
+  <!-- CONTENIDO -->
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9">
+        <section class="card quiz-card shadow-lg border-0">
+          <header class="card-header text-center py-4">
+            <h1 class="h3 m-0">Kitty te Pregunta</h1>
+            <p class="text-muted mb-0">Un quiz breve y hermoso sobre Ana Frank ✨</p>
+          </header>
+
+          <div class="card-body p-4 p-md-5">
+            <!-- Progreso -->
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="progress flex-grow-1" style="height: 10px;">
+                <div id="quizProgress" class="progress-bar" role="progressbar" style="width: 0%"></div>
+              </div>
+              <span id="quizCounter" class="badge rounded-pill bg-secondary-subtle text-body-secondary">0/0</span>
+            </div>
+
+            <!-- Pregunta -->
+            <div class="d-flex align-items-start justify-content-between mb-3">
+              <h2 id="question" class="h5 fw-semibold m-0"></h2>
+            </div>
+
+            <!-- Opciones -->
+            <div id="options" class="quiz-options"></div>
+
+            <!-- Acciones -->
+            <div class="d-grid d-sm-flex gap-2 mt-4">
+              <button id="check-btn" class="btn btn-kitty" disabled>
+                <span class="me-1">✔</span> Comprobar
+              </button>
+              <button id="next-btn" class="btn btn-outline-dark" disabled>
+                Siguiente →
+              </button>
+            </div>
+
+            <!-- Separador -->
+            <hr class="my-5">
+
+            <!-- Resultado final -->
+            <div id="result-container" class="text-center d-none">
+              <div class="display-6 mb-2">🎉</div>
+              <h3 class="h4 mb-3">¡Juego terminado!</h3>
+              <p id="score" class="lead mb-4"></p>
+              <button id="restart-btn" class="btn btn-kitty">Jugar de nuevo</button>
+            </div>
+          </div>
+
+          <footer class="card-footer text-center small text-muted py-3">
+            Hecho con cariño para aprender y recordar 💛
+          </footer>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+<footer class="bg-dark text-white pt-5 pb-4">
+  <div class="container text-md-left">
+    <div class="row text-md-left">
+      <div class="col-md-3">
+        <h5 class="text-uppercase mb-4 fw-bold">ENLACES</h5>
+        <p><a href="inicio.html" class="text-white text-decoration-none">Inicio</a></p>
+        <p><a href="equipo.html" class="text-white text-decoration-none">Nosotros</a></p>
+        <p><a href="mailto:info@queridakitty.org" class="text-white text-decoration-none">Contacto</a></p>
+      </div>
+
+      <div class="col-md-3">
+        <h5 class="text-uppercase mb-4 fw-bold">REDES SOCIALES</h5>
+        <a href="https://www.facebook.com/MuseodelaLibertad/?locale=es_LA" target="_blank" class="text-white me-4"><i class="fab fa-facebook fa-2x"></i></a>
+        <a href="https://x.com/museolibertaddh?lang=es" target="_blank" class="text-white me-4"><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="https://museodelalibertad.org/contacto/" target="_blank" class="text-white me-4"><i class="fab fa-whatsapp fa-2x"></i></a>
+        <a href="https://www.instagram.com/museodelalibertad/?hl=es" target="_blank" class="text-white me-4"><i class="fab fa-instagram fa-2x"></i></a>
+      </div>
+
+      <div class="col-md-6">
+        <h5 class="text-uppercase mb-4 fw-bold">CONTACTO</h5>
+        <p><i class="fas fa-phone me-2"></i> 647-754-0072</p>
+        <p><i class="fas fa-envelope me-2"></i> ...@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt me-2"></i> Panamá, Provincia de Panamá</p>
+      </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row align-items-center">
+      <div class="col-12">
+        <p class="text-center m-0">© Fundación Democracia y Libertad. Amigas de Ana Frank. 2025</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Lógica del Quiz -->
   <script src="kitty.js"></script>
 </body>
 </html>

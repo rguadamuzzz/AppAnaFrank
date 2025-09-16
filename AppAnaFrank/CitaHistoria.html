@@ -1,601 +1,462 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Querida Kitty</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Querida Kitty – Historia Viva</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Iconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <!-- Estilos de la página (si usas un .css externo, enlázalo aquí también) -->
+  <style>
+    body{background:#fff8ec;font-family:Arial, sans-serif}
+    /* NAV */
+    .navbar{padding:1rem 1.5rem;border-radius:40px;margin:15px auto;width:95%;
+      border:1px solid #eadfd5;box-shadow:0 2px 8px rgba(0,0,0,.08);background:#f1e5cd!important}
+    .navbar .nav-link{margin:0 25px;font-size:1.05rem;font-weight:600;color:#5a3a2a!important}
+    .navbar .nav-link:hover{text-decoration:underline}
+    .navbar .nav-link.active[aria-current="page"]::after{
+      content:"";position:absolute;left:10px;right:10px;bottom:-6px;height:2px;background:#5a3a2a;border-radius:2px}
+    .navbar-toggler{border-color:rgba(0,0,0,.15)}
+    .navbar-light .navbar-toggler-icon{
+      background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,.65)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")}
+    /* Header */
+    .header-container{text-align:center;padding:20px;margin-top:20px}
+    .header-container .title{font-size:1.8rem;font-weight:700;color:#8B5E3C;margin-bottom:6px;text-transform:uppercase;letter-spacing:2px;
+      display:inline-block;border-bottom:2px solid #867b7b;padding-bottom:4px}
+    .header-container .intro{font-size:1.15rem;color:#666;max-width:800px;margin:10px auto 0}
+    /* Carrusel principal */
+    #carouselExampleIndicators{max-width:1000px;margin:70px auto 0;overflow:visible;background:#fdf6ec}
+    .carousel-control-prev,.carousel-control-next{width:auto}
+    .carousel-control-prev{left:-60px}.carousel-control-next{right:-60px}
+    .carousel-control-prev-icon{
+      background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0L4.5.75 1.25 4l3.25 3.25.75-.75L2.75 4l2.5-2.5z'/%3E%3C/svg%3E")}
+    .carousel-control-next-icon{
+      background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0L2 0.75 5.25 4 2 7.25l.75.75L6 4 2.75 0z'/%3E%3C/svg%3E")}
+    @media (max-width:992px){#carouselExampleIndicators{margin-top:60px}.carousel-control-prev{left:-40px}.carousel-control-next{right:-40px}}
+    @media (max-width:576px){.carousel-control-prev{left:-30px}.carousel-control-next{right:-30px}}
+    /* Cards */
+    .card{display:flex;flex-direction:column;height:100%}
+    .card-body{display:flex;flex-direction:column}
+    .card-body .btn{margin-top:auto}
+    .btn-primary,.btn-secondary{background:#C1997F!important;border-color:#C1997F!important;color:#fff!important;
+      border-radius:8px;font-weight:bold}
+    .btn-primary:hover,.btn-secondary:hover{background:#D1B3A4!important;transform:translateY(-1px)}
+    .modal-dialog{margin-top:100px}
+    /* Citas (carrusel horizontal con auto-scroll) */
+    .quotes-section{background:#e0c1ad url('img/holocausto.jpg') center/cover no-repeat;
+      padding:70px 20px;border-top:5px solid #996a3e;border-bottom:5px solid #996a3e;margin-top:70px}
+    .quotes-title{font-size:32px;font-weight:800;color:#12190f;text-transform:uppercase;letter-spacing:2px;margin-bottom:40px}
+    .carousel-wrapper{position:relative;max-width:1000px;margin:0 auto;overflow:hidden}
+    .quotes-track{display:flex;gap:20px;will-change:transform}
+    .quote-card{min-width:280px;max-width:320px;background:rgba(253,246,236,.95);color:#12190f;font-size:18px;font-style:italic;
+      padding:28px;border-radius:16px;border-left:6px solid #996a3e;box-shadow:0 6px 16px rgba(0,0,0,.2);position:relative}
+    .quote-card::before{content:"“";position:absolute;top:8px;left:12px;font-size:44px;color:#996a3e;opacity:.3}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:#813916;color:#fff;border:none;
+      padding:12px 16px;border-radius:50%;cursor:pointer;font-size:22px;z-index:2}
+    .carousel-btn:hover{background:#000}
+    .left-btn{left:10px}.right-btn{right:10px}
+  </style>
 </head>
 <body>
- 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fw-bold">
-  <img src="img/logo_ana_frank-removebg-preview.png" href="inicio.html" alt="Logo" width="40" height="40" class="d-inline-block align-text-top ms-4">
-  
-  <a class="navbar-brand font-weight-bold" href="inicio.html">Querida Kitty</a>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-5">
-      <a class="nav-item nav-link active" href="inicio.html">Inicio</a>
-      <a class="nav-item nav-link" href="#">Mi Diario</a>
-      <a class="nav-item nav-link" href="#">Explora</a>
-      <a class="nav-item nav-link" href="#">Historia Viva</a>
-      <a class="nav-item nav-link" href="equipo.html">Amigas de Ana Frank</a>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm fw-bold rounded-4">
+  <div class="container-xxl">
+    <a class="navbar-brand d-flex align-items-center" href="inicio.html">
+      <img src="img/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+      <span class="fw-bold" style="color:#5a3a2a;">Querida Kitty</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link px-lg-4" href="inicio.html">Inicio</a>
+        <a class="nav-link px-lg-4" href="MiDiario.html">Mi Diario</a>
+        <a class="nav-link px-lg-4 active" aria-current="page" href="CitaHistoria.html">Historia Viva</a>
+        <a class="nav-link px-lg-4" href="equipo.html">Amigas de Ana Frank</a>
+        <a class="nav-link px-lg-4" href="kitty.html">Kitty te Pregunta</a>
+      </div>
     </div>
   </div>
 </nav>
 
-</header>
-
- <!--primera diapositiva-->
+<!-- Encabezado -->
 <div class="header-container">
-<h1 class="title">Línea de tiempo: Historia para no olvidar</h1>
-<p class="intro">En esta línea de tiempo podrás recorrer los sucesos que marcaron la historia entre 1929 y 1960 y descubrir por qué siguen resonando en la actualidad.</p>
+  <h1 class="title">Línea de tiempo: Historia para no olvidar</h1>
+  <p class="intro">Recorre los sucesos que marcaron la historia entre 1929 y 1960 y descubre por qué siguen resonando hoy.</p>
 </div>
 
-    <div id="carouselExampleIndicators" class="carousel slide">
+<!-- CARRUSEL PRINCIPAL -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="8000">
+  <!-- Indicadores -->
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-label="1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="3"></button>
   </div>
+
   <div class="carousel-inner">
+
+    <!-- Slide 1 -->
     <div class="carousel-item active">
-      <div class="row row-cols-2 row-cols-md-3 g-5">
-  <div class="col">
-    <div class="card h-100">
-      <img src="https://i.pinimg.com/originals/2f/22/29/2f22291f03ab36296683dd08052fca49.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Nacimiento y primeros años: 12 de junio de 1929</h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Explorar historia
-</button>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Card 1 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Ana%20Frank.png" class="card-img-top" alt="Ana Frank niña">
+            <div class="card-body">
+              <h5 class="card-title">Nacimiento y primeros años (1929)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m1">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Esperanza incluso en la adversidad.</small></div>
+          </div>
+        </div>
+        <!-- Modal 1 -->
+        <div class="modal fade" id="m1" tabindex="-1" aria-labelledby="m1Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m1Label">Nacimiento y primeros años</h1></div>
+            <div class="modal-body">
+              <p>Ana nació en Fráncfort del Meno, en una familia judía. Sus primeros años estuvieron llenos de aprendizaje y curiosidad.</p>
+              <div class="row g-3">
+                <div class="col-6"><img src="img/Ana%20Frank.png" class="img-fluid" alt="Retrato"></div>
+                <div class="col-6"><img src="img/logo.png" class="img-fluid" alt="Logo"></div>
+              </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Nacimiento y primeros años: 12 de junio de 1929</h1>
-      </div>
-      <div class="modal-body">
-        <!--contenido modal-->
-       <p>Ana Frank nació en Fráncfort del Meno, Alemania, en el seno de una familia judía conformada por Otto, Edith y su hermana mayor Margot. Su infancia transcurrió entre juegos, escuela y tardes familiares en una ciudad que en ese entonces tenía una comunidad judía muy activa y respetada. Alemania aún vivía las consecuencias de la Primera Guerra Mundial, 
-        pero para Ana los primeros años eran de alegría, historias y sueños. Desde pequeña mostró curiosidad por aprender, amor por la lectura y una gran imaginación.</p>
-<div class="row g-3">
-  <div class="col-6">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Anne_Frank%2C_1942.jpg" class="img-fluid" alt="Imagen 1">
-  </div>
-  <div class="col-6">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Anne_Frank%2C_1934.jpg" class="img-fluid" alt="Imagen 2">
-  </div>
-  <div class="col-6">
-    <img src="https://commons.wikimedia.org/wiki/File:AnneFrankSchoolPhoto.jpg" class="img-fluid" alt="Imagen 3">
-  </div>
-  <div class="col-6">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anne_Frank%2C_1939_-_32036884646.jpg" class="img-fluid" alt="Imagen 4">
-  </div>
-</div>
+        <!-- Card 2 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/holocausto.jpg" class="card-img-top" alt="Traslado a Ámsterdam">
+            <div class="card-body">
+              <h5 class="card-title">Traslado a Ámsterdam (1933–1934)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m2">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Fe en la humanidad.</small></div>
+          </div>
+        </div>
+        <!-- Modal 2 -->
+        <div class="modal fade" id="m2" tabindex="-1" aria-labelledby="m2Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m2Label">Traslado a Ámsterdam</h1></div>
+            <div class="modal-body">
+              <p>Con la llegada de Hitler al poder, la familia Frank buscó seguridad en Países Bajos, donde rehicieron su vida por un tiempo.</p>
+              <img src="img/holocausto.jpg" class="img-fluid" alt="Ámsterdam">
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
+        <!-- Card 3 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/holocausto.jpg" class="card-img-top" alt="Restricciones">
+            <div class="card-body">
+              <h5 class="card-title">Restricciones en Países Bajos (1940–1942)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m3">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Resiliencia en tiempos difíciles.</small></div>
+          </div>
+        </div>
+        <!-- Modal 3 -->
+        <div class="modal fade" id="m3" tabindex="-1" aria-labelledby="m3Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m3Label">Restricciones y persecución</h1></div>
+            <div class="modal-body">
+              <p>Tras la invasión, comenzaron prohibiciones y señales de segregación. La vida cotidiana cambió de forma drástica.</p>
+              <img src="img/holocausto.jpg" class="img-fluid" alt="Señales">
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Esperanza - incluso en medio de la persecución.</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Traslado a Ámsterdam: 1933–1934</h5>
-       <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-   Explorar historia
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel2">Traslado a Ámsterdam: 1933–1934</h1>
-      </div>
-      <div class="modal-body">
-        <!--contenido modal-->
-      <p>En 1933, Hitler llegó al poder y muy pronto los judíos comenzaron a sufrir persecuciones, humillaciones y amenazas en Alemania. Otto Frank, preocupado por el futuro de su familia, decidió mudarse a Ámsterdam en 1934. Allí intentaron rehacer su vida: Otto abrió una empresa, Edith se encargaba del hogar y las niñas retomaron sus estudios. Ana se adaptó rápido, aprendió holandés, hizo nuevas amigas y disfrutaba de paseos en bicicleta por la ciudad.
-         La familia pensaba que por fin estaría a salvo, pero el nazismo pronto se extendería también a los Países Bajos.</p>
-<img src="..." class="card-img-top" alt="...">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary"> Fe en la humanidad - "a pesar de todo, creo en la bondad del ser humano".</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Restricciones y persecución en Países Bajos: 1940–1942 </h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-   Explorar historia
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel3">Restricciones y persecución en Países Bajos: 1940–1942</h1>
-      </div>
-      <div class="modal-body">
-        <!--contenido del modal-->
-      <p>El 10 de mayo de 1940, Alemania invadió Países Bajos. Muy pronto comenzaron las restricciones: los judíos no podían montar en bicicleta, ir al cine, comprar en ciertos negocios ni asistir a escuelas comunes. Todos debían portar la estrella amarilla en su ropa, un símbolo que los aislaba y humillaba en público. Edith ya no podía hacer sus compras donde solía, Margot tuvo que cambiarse a una escuela judía, y Ana vio cómo poco a poco sus amigas no podían estar con ella.
-         La ciudad que antes era su refugio se volvió un lugar de miedo y desconfianza.</p>
-<img src="..." class="card-img-top" alt="...">
-
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Resiliencia - fuerza para resistir el encierro.</small>
-      </div>
-    </div>
-  </div>
-</div>  
-
-    <!--segunda diapositiva-->
-    </div>
+    <!-- Slide 2 -->
     <div class="carousel-item">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="https://www.clarin.com/img/2015/12/30/H1WXvWkEx_1256x620.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">El diario de cumpleaños: 12 de junio de 1942</h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-   Explorar historia
-</button>
+        <!-- Card 4 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/logo.png" class="card-img-top" alt="Diario">
+            <div class="card-body">
+              <h5 class="card-title">El diario de cumpleaños (1942)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m4">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">La voz que perdura.</small></div>
+          </div>
+        </div>
+        <!-- Modal 4 -->
+        <div class="modal fade" id="m4" tabindex="-1" aria-labelledby="m4Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m4Label">El diario de cumpleaños</h1></div>
+            <div class="modal-body">
+              <p>En su cumpleaños 13, Ana recibió el cuaderno a cuadros rojos que llamó “Kitty”, su confidente.</p>
+              <img src="img/logo.png" class="img-fluid" alt="Diario">
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel4">El diario de cumpleaños: 12 de junio de 1942</h1>
-      </div>
-      <div class="modal-body">
-        <!--contenido del modal-->
-        <p>En su cumpleaños número 13, Ana recibió un cuaderno a cuadros rojos que llamó “Kitty”. Lo convirtió en su confidente más cercano, escribiendo en él sobre su vida cotidiana, sus sueños de ser escritora, sus miedos y la injusticia que veía a su alrededor. En medio de tanta discriminación, el diario fue un refugio donde Ana se sintió libre para expresar lo que no podía compartir con los demás.
-           Cada palabra escrita era una forma de resistencia frente al silencio que la rodeaba.</p>
-<div class="row g-3">
-  <div class="col-6">
-    <figure class="img-fluid">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/whatever-path-del-archivo.jpg" alt="Diario de Anne Frank, Iglesia de San Nicolás, Kiel, Alemania" alt="Imagen 1">
-  <figcaption>
-    Foto por <a href="https://commons.wikimedia.org/wiki/User:Delso" target="_blank" rel="noopener">Diego Delso</a>, bajo licencia 
-    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
-  
-  </figcaption>
-</figure>
-  </div>
-  <div class="col-6">
-    <img src="..." class="img-fluid" alt="Imagen 2">
-  </div>
-  <div class="col-6">
-    <img src="..." class="img-fluid" alt="Imagen 3">
-  </div>
-  <div class="col-6">
-    <img src="..." class="img-fluid" alt="Imagen 4">
-  </div>
-</div>
+        <!-- Card 5 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/holocausto.jpg" class="card-img-top" alt="Anexo secreto">
+            <div class="card-body">
+              <h5 class="card-title">Ocultamiento en el Anexo (1942)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m5">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Valor frente al miedo.</small></div>
+          </div>
+        </div>
+        <!-- Modal 5 -->
+        <div class="modal fade" id="m5" tabindex="-1" aria-labelledby="m5Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m5Label">Ocultamiento en el Anexo</h1></div>
+            <div class="modal-body">
+              <p>La familia Frank se ocultó detrás de la oficina de Otto. Una estantería ocultaba la entrada al refugio.</p>
+              <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/dP9KXIKcqQk" title="Anne Frank Brasil"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
+        <!-- Card 6 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/holocausto.jpg" class="card-img-top" alt="Vida en el anexo">
+            <div class="card-body">
+              <h5 class="card-title">Vida en el Anexo (1942–1944)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m6">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Dignidad y unión.</small></div>
+          </div>
+        </div>
+        <!-- Modal 6 -->
+        <div class="modal fade" id="m6" tabindex="-1" aria-labelledby="m6Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m6Label">Vida en el Anexo</h1></div>
+            <div class="modal-body">
+              <p>Silencio durante el día, estudio y lecturas. Ana escribía con esperanza y mirada crítica.</p>
+              <div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/V7A1Ya-5Ey0" title="Anne Frank House"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary"> Amor a la familia - gran apego a sus padres y hermana</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Ocultamiento en el Anexo Secreto: 6 de julio de 1942</h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal5">
-   Explorar historia
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel5">Ocultamiento en el Anexo Secreto: 6 de julio de 1942</h1>
-      </div>
-      <div class="modal-body">
-        <!--Contenido Modal-->
-        <p>Cuando Margot recibió una citación para presentarse en un campo de trabajo nazi, la familia decidió ocultarse de inmediato en un anexo secreto construido detrás de la oficina de Otto. De un día para otro dejaron su casa, su escuela y sus pertenencias. Pronto se unieron a ellos la familia Van Pels y, más tarde, Fritz Pfeffer, sumando ocho personas escondidas. La entrada estaba oculta tras una estantería. Aunque vivían con miedo constante a ser descubiertos, también encontraban pequeños momentos de unión.
-           Gracias al apoyo de Miep Gies, Jan Gies, Victor Kugler y Johannes Kleiman, recibían comida, ropa y noticias del exterior.</p>
-<div class="ratio ratio-16x9 mb-3">
-  <iframe 
-    src="https://www.youtube.com/embed/dP9KXIKcqQk?si=u_Pkd_aIgFRgJX-t" 
-    title="Video obtenido de: Anne Frank Brasil" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-  </iframe>
-</div>
-<p class="text-center">
-  <small>Video obtenido de: Anne Frank Brasil</small>
-</p>
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Valor - enfrentó el miedo con dignidad.</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="https://blob.lacaderadeeva.com/images/2023/06/13/habitacion-ana-frank.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Vida en el Anexo: 1942–1944</h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal6">
-   Explorar historia
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel6">Vida en el Anexo: 1942–1944</h1>
-      </div>
-      <div class="modal-body">
-        <p>La vida en el escondite era silenciosa y difícil. No podían hacer ruido durante el día para no alertar a los trabajadores de la oficina. Caminaban descalzos, comían raciones pequeñas y pasaban largas horas leyendo o estudiando. Ana escribía sobre las discusiones entre los escondidos, pero también sobre la ternura de compartir una cena en familia, los nervios al escuchar la radio clandestina y los sentimientos hacia Peter Van Pels. A pesar del encierro, Ana nunca dejó de soñar con publicar un libro algún día.
-           El apoyo de sus protectores fue clave: arriesgaban su vida al llevar comida y noticias, sosteniendo con valentía la esperanza de los escondidos.</p>
-<div class="ratio ratio-16x9 mb-3">
-  <iframe 
-    src="https://www.youtube.com/embed/V7A1Ya-5Ey0?si=8J4TgK334TqZ3bd0&start"
-    title="YouTube video player" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen>
-  </iframe>
-</div>
-<p class="text-center">
-  <small>Video obtenido de: Anne Frank House</small>
-</p>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Libertad - defendió la importancia de ser libre.</small>
-      </div>
-    </div>
-  </div>
-</div>
-
-     <!--Tercera diapositiva-->
-    </div>
+    <!-- Slide 3 -->
     <div class="carousel-item">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Redada y deportación: 4–8 de agosto de 1944 </h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal7">
-   Explorar historia
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel7">Redada y deportación: 4–8 de agosto de 1944</h1>
-      </div>
-      <div class="modal-body">
-        <p>El 4 de agosto de 1944, la Gestapo irrumpió en el Anexo Secreto, traicionada por un delator desconocido. Todos fueron arrestados y llevados al campo de tránsito de Westerbork, donde vivían hacinados y vigilados, esperando ser trasladados a campos de concentración. Ana, Margot y su familia fueron enviadas en tren a Auschwitz, un lugar de terror donde los prisioneros eran separados, obligados a trabajos agotadores y enfrentaban hambre, enfermedades y violencia.
-           Otto fue separado de su familia, mientras Ana y Margot permanecieron juntas. La redada marcó el fin de su vida en secreto y el comienzo de un sufrimiento aún mayor.</p>
-<figure class="">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/…/Bundesarchiv_Bild_183-N0827-318,_KZ_Auschwitz,_Ankunft_ungarischer_Juden.jpg"
-       alt="Grupo de judíos húngaros llegando al campo de exterminio de Auschwitz, verano de 1944">
-  <figcaption>
-    Foto del archivo Bundesarchiv, imagen número 183-N0827-318 / CC BY-SA 3.0 Germany.
-    <!-- Si la modificas, añade “Modificada por [Tu Nombre o App]” -->
-  </figcaption>
-</figure>
+        <!-- Card 7 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/holocausto.jpg" class="card-img-top" alt="Redada">
+            <div class="card-body">
+              <h5 class="card-title">Redada y deportación (1944)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m7">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Memoria y justicia.</small></div>
+          </div>
+        </div>
+        <!-- Modal 7 -->
+        <div class="modal fade" id="m7" tabindex="-1" aria-labelledby="m7Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m7Label">Redada y deportación</h1></div>
+            <div class="modal-body">
+              <p>El 4 de agosto de 1944 la Gestapo irrumpió en el Anexo. Comenzó el tránsito hacia los campos.</p>
+              <img src="img/holocausto.jpg" class="img-fluid" alt="Auschwitz">
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
+        <!-- Card 8 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/holocausto.jpg" class="card-img-top" alt="Campos">
+            <div class="card-body">
+              <h5 class="card-title">Campos de concentración (1944–1945)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m8">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">Recordar para no repetir.</small></div>
+          </div>
+        </div>
+        <!-- Modal 8 -->
+        <div class="modal fade" id="m8" tabindex="-1" aria-labelledby="m8Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m8Label">Campos de concentración</h1></div>
+            <div class="modal-body">
+              <p>Hacinamiento, hambre y enfermedad marcaron a millones. La liberación llegó, pero el dolor perduró.</p>
+              <img src="img/holocausto.jpg" class="img-fluid" alt="Bergen-Belsen">
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/logo.png" class="card-img-top" alt="Legado">
+            <div class="card-body">
+              <h5 class="card-title">Diario, legado y memoria (1945–1960)</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#m9">Explorar historia</button>
+            </div>
+            <div class="card-footer"><small class="text-body-secondary">La voz que inspira al mundo.</small></div>
+          </div>
+        </div>
+        <!-- Modal 9 -->
+        <div class="modal fade" id="m9" tabindex="-1" aria-labelledby="m9Label" aria-hidden="true">
+          <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h1 class="modal-title fs-5" id="m9Label">Diario, legado y memoria</h1></div>
+            <div class="modal-body">
+              <p>Otto Frank impulsó la publicación del diario en 1947. En 1960 se abrió la Casa de Ana Frank en Ámsterdam.</p>
+              <img src="img/logo.png" class="img-fluid" alt="Publicación del diario">
+            </div>
+            <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button></div>
+          </div></div>
+        </div>
+
       </div>
     </div>
-  </div>
-</div>
 
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Justicia - cuestionaba la discriminación y el odio.</small>
-      </div>
-    </div>
   </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="https://www.elviejotopo.com/wp-content/uploads/2016/12/020DF3740000044D-3714136-image-a-84_1469784617735.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Campos de concentración: Septiembre 1944 – marzo 1945</h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal8">
-   Explorar historia
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel8">Campos de concentración: Septiembre 1944 – marzo 1945</h1>
-      </div>
-      <div class="modal-body">
-        <p>Desde Auschwitz, Ana y Margot fueron trasladadas a Bergen-Belsen, un campo sobrepoblado donde el hambre, las enfermedades y el frío eran insoportables. Edith murió en Auschwitz en enero de 1945, y poco después Ana y Margot fallecieron de tifus, semanas antes de que el campo fuera liberado. Otto sobrevivió y fue testigo del dolor de perder a su familia. Los campos de concentración fueron lugares de sufrimiento extremo y deshumanización,
-           pero también de historias que hoy sirven para recordar la importancia de la memoria y la humanidad.</p>
-<img src="https://commons.wikimedia.org/wiki/File:The_Liberation_of_Bergen-belsen_Concentration_Camp,_April_1945_BU3805.jpg" class="card-img-top" alt="Campo de concentración Bergen-Belsen">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Solidaridad - compartió vida y recursos con los demás en el anexo.</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Diario, legado y memoria: 1945-1960</h5>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal9">
-   Explorar historia
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel9">Diario, legado y memoria: 1945-1960</h1>
-      </div>
-      <div class="modal-body">
-        <p>Otto Frank fue el único de los escondidos que sobrevivió. Al regresar a Ámsterdam, Miep Gies le entregó el diario de Ana, que había rescatado de la redada. Leerlo fue doloroso, pero también revelador: descubrió una Ana profunda, crítica y soñadora. En 1947, decidió publicarlo para que la voz de su hija no quedara en silencio. El diario se convirtió en un testimonio universal contra la intolerancia, traducido a más de 70 idiomas. En 1960, el anexo fue abierto como la Casa de Ana Frank, un museo que recuerda no solo a Ana, sino a los millones de víctimas del Holocausto.
-           Su voz, a través de sus páginas, sigue viva hasta hoy.</p>
-<div class="row g-3">
-  <div class="col-6">
-    <img src="https://commons.wikimedia.org/wiki/File:Diario_anne_frank.jpg" class="img-fluid" alt="Imagen 1">
-  </div>
-  <div class="col-6">
-    <figure class="img-fluid">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/whatever-path-del-archivo.jpg" alt="Diario de Anne Frank, Iglesia de San Nicolás, Kiel, Alemania" alt="Imagen 2">
-  <figcaption>
-    Foto por <a href="https://commons.wikimedia.org/wiki/User:Delso" target="_blank" rel="noopener">Diego Delso</a>, bajo licencia 
-    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
-  
-  </figcaption>
-</figure>
-  </div>
-  <div class="col-6">
-    <figure class="img-fluid">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Centro_ana_frank_argentina_frente.jpg" alt="Imagen 3"
-       alt="Frente del Centro Ana Frank Argentina">
-  <figcaption>
-    Foto por <a href="https://commons.wikimedia.org/wiki/User:Dafnu" target="_blank" rel="noopener">Dafnu</a>, bajo licencia 
-    <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. 
-   
-  </figcaption>
-</figure>
-  </div>
-  <div class="col-6">
-    <figure class="img-fluid">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/AnneFrank_dHont.jpg" alt="imagen 4"
-       alt="Estatua de Anne Frank en Utrecht por Pieter d'Hont">
-  <figcaption>
-    Foto por <a href="https://commons.wikimedia.org/wiki/User:Brbbl" target="_blank" rel="noopener">brbbl</a>, bajo licencia 
-    <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.
-   
-  </figcaption>
-</figure>
-  </div>
-</div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Responsabilidad - se tomaba en serio la escritura de su diario como testimonio.</small>
-      </div>
-    </div>
-  </div>
-</div>
-     
-    </div>
-  </div>
+  <!-- Controles -->
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
+    <span class="visually-hidden">Anterior</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden">Siguiente</span>
   </button>
 </div>
-</body>
+
+<!-- Sonido de pasar página -->
 <audio id="pageSound" src="page-flip-01a.mp3" preload="auto"></audio>
 <script>
-  const sound = document.getElementById("pageSound");
-  const carousel = document.getElementById("carouselExampleIndicators");
-  carousel.addEventListener("slide.bs.carousel", () => {
-    sound.currentTime = 0;
-    sound.play();
+  document.addEventListener('DOMContentLoaded', () => {
+    const sound = document.getElementById('pageSound');
+    const car = document.getElementById('carouselExampleIndicators');
+    car.addEventListener('slide.bs.carousel', () => { try{ sound.currentTime = 0; sound.play(); }catch(e){} });
   });
 </script>
 
+<!-- SECCIÓN DE CITAS (con auto-scroll y muchas frases) -->
 <section class="quotes-section">
-<h3 class="quotes-title">Voces del Holocausto</h3>
-<div class="carousel-wrapper">
-<button class="carousel-btn left-btn">&#10094;</button>
-<div class="quotes-carousel">
-<div class="quote-card">«Quiero seguir viviendo, incluso después de mi muerte.» – Ana Frank</div>
-<div class="quote-card">«Los libros nos dan libertad cuando todo lo demás nos es negado.» – Primo Levi</div>
-<div class="quote-card">«Nunca olvides que la historia nos enseña a ser libres.» – Elie Wiesel</div>
-<div class="quote-card">«Las personas libres jamás podrán comprender lo que los libros significan para quienes vivimos en cautiverio.» – Ana Frank</div>
-<div class="quote-card">«Nunca debemos olvidar nuestra historia para no repetirla.» – Elie Wiesel</div>
-<div class="quote-card">«La felicidad se puede encontrar aun en los tiempos más oscuros, si uno recuerda encender la luz.» – Ana Frank</div>
-<div class="quote-card">«Para sobrevivir, debemos recordar y aprender del pasado.» – Primo Levi</div>
-<div class="quote-card">«Los jóvenes merecen esperanza y oportunidades, incluso en tiempos oscuros.» – Miep Gies</div>
-<div class="quote-card">«Me siento como un pájaro al que le han cortado las alas y que espera que algún día pueda volar de nuevo.» – Ana Frank</div>
-<div class="quote-card">«Protegerlos era nuestra forma de mantener la humanidad viva.» – Jan Gies</div>
-<div class="quote-card">«Mi hija quería vivir y dejar su huella en el mundo; eso nos dio fuerzas.» – Otto Frank</div>
-<div class="quote-card">«No pienso en toda la miseria, sino en la belleza que aún permanece.» – Ana Frank</div>
-</div>
-<button class="carousel-btn right-btn">&#10095;</button>
-</div>
+  <h3 class="quotes-title" style="color:#fff; text-shadow:0 2px 6px rgba(0,0,0,.35);">Voces del Holocausto</h3>
+  <div class="carousel-wrapper">
+    <button class="carousel-btn left-btn" aria-label="Anterior">&#10094;</button>
+
+    <!-- Pista que se mueve: duplicamos citas para loop suave -->
+    <div class="quotes-track" id="quotesTrack">
+      <!-- Lote A -->
+      <div class="quote-card">«Quiero seguir viviendo, incluso después de mi muerte.» — Ana Frank</div>
+      <div class="quote-card">«Los libros nos dan libertad cuando todo lo demás nos es negado.» — Primo Levi</div>
+      <div class="quote-card">«Nunca olvides que la historia nos enseña a ser libres.» — Elie Wiesel</div>
+      <div class="quote-card">«La felicidad se puede encontrar aun en los tiempos más oscuros, si uno recuerda encender la luz.» — Ana Frank</div>
+      <div class="quote-card">«Para sobrevivir, debemos recordar y aprender del pasado.» — Primo Levi</div>
+      <div class="quote-card">«Los jóvenes merecen esperanza y oportunidades, incluso en tiempos oscuros.» — Miep Gies</div>
+      <div class="quote-card">«No pienso en toda la miseria, sino en la belleza que aún permanece.» — Ana Frank</div>
+      <div class="quote-card">«Donde hay memoria, hay futuro.» — Elie Wiesel</div>
+      <!-- Lote B (duplicado para bucle) -->
+      <div class="quote-card">«Quiero seguir viviendo, incluso después de mi muerte.» — Ana Frank</div>
+      <div class="quote-card">«Los libros nos dan libertad cuando todo lo demás nos es negado.» — Primo Levi</div>
+      <div class="quote-card">«Nunca olvides que la historia nos enseña a ser libres.» — Elie Wiesel</div>
+      <div class="quote-card">«La felicidad se puede encontrar aun en los tiempos más oscuros, si uno recuerda encender la luz.» — Ana Frank</div>
+      <div class="quote-card">«Para sobrevivir, debemos recordar y aprender del pasado.» — Primo Levi</div>
+      <div class="quote-card">«Los jóvenes merecen esperanza y oportunidades, incluso en tiempos oscuros.» — Miep Gies</div>
+      <div class="quote-card">«No pienso en toda la miseria, sino en la belleza que aún permanece.» — Ana Frank</div>
+      <div class="quote-card">«Donde hay memoria, hay futuro.» — Elie Wiesel</div>
+    </div>
+
+    <button class="carousel-btn right-btn" aria-label="Siguiente">&#10095;</button>
+  </div>
 </section>
+
 <script>
-// JavaScript
+/* Carrusel de citas con auto-scroll y loop continuo */
 document.addEventListener('DOMContentLoaded', () => {
-const carousel = document.querySelector('.quotes-carousel');
-const leftBtn = document.querySelector('.left-btn');
-const rightBtn = document.querySelector('.right-btn');
+  const track = document.getElementById('quotesTrack');
+  const left = document.querySelector('.left-btn');
+  const right = document.querySelector('.right-btn');
 
-leftBtn.addEventListener('click', () => {
-carousel.scrollBy({ left: -260, behavior: 'smooth' });
-});
+  let pos = 0;
+  const step = 320;      // ancho aprox. de cada tarjeta + gap
+  const speed = 4000;    // cada 4s
+  let timer = null;
 
-rightBtn.addEventListener('click', () => {
-carousel.scrollBy({ left: 260, behavior: 'smooth' });
-});
+  function move(dx){
+    pos += dx;
+    track.style.transform = `translateX(${pos}px)`;
+    // Si nos fuimos muy a la izquierda, “reseteamos” hacia el centro del duplicado
+    const maxLeft = -step * 8; // 8 tarjetas visibles antes de duplicado
+    const maxRight = step * 8;
+    if(pos < maxLeft) pos = 0;
+    if(pos > maxRight) pos = 0;
+  }
+
+  function start(){
+    stop();
+    timer = setInterval(() => move(-step), speed);
+  }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+  right.addEventListener('click', () => { move(-step); start(); });
+  left.addEventListener('click',  () => { move(+step); start(); });
+  track.addEventListener('mouseenter', stop);
+  track.addEventListener('mouseleave', start);
+
+  start();
 });
 </script>
-</body>
+
+<!-- FOOTER -->
 <footer class="bg-dark text-white pt-5 pb-4">
-    <div class="container text-md-left">
-      <div class="row text-md-left">
-
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h5 class="text-uppercase mb-4 fw-bold">ENLACES</h5>
-          <p><a href="#" class="text-white text-decoration-none">Inicio</a></p>
-          <p><a href="#" class="text-white text-decoration-none">Nosotros</a></p>
-          <p><a href="#" class="text-white text-decoration-none">Blog</a></p>
-          <p><a href="#" class="text-white text-decoration-none">Contacto</a></p>
-        </div>
-
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h5 class="text-uppercase mb-4 fw-bold">REDES SOCIALES</h5>
-          <a href="https://www.facebook.com/MuseodelaLibertad/?locale=es_LA" target="_blank" class="text-white me-4">
-            <i class="fab fa-facebook fa-2x"></i>
-          </a>
-          <a href="https://x.com/museolibertaddh?lang=es" target="_blank" class="text-white me-4">
-            <i class="fab fa-twitter fa-2x"></i>
-          </a>
-          <a href="https://museodelalibertad.org/contacto/" target="_blank" class="text-white me-4">
-            <i class="fab fa-whatsapp fa-2x"></i>
-          </a>
-          <a href="https://www.instagram.com/museodelalibertad/?hl=es" target="_blank" class="text-white me-4">
-            <i class="fab fa-instagram fa-2x"></i>
-          </a>
-        </div>
-
-        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-          <h5 class="text-uppercase mb-4 fw-bold">CONTACTO</h5>
-          <p><i class="fas fa-phone me-2"></i> 647-754-0072</p>
-          <p><i class="fas fa-envelope me-2"></i> GaviniMaki@rhyta.com</p>
-          <p><i class="fas fa-map-marker-alt me-2"></i> 1718 Park Boulevard Marshalltown, IA 50158</p>
-        </div>
-
+  <div class="container text-md-left">
+    <div class="row text-md-left">
+      <div class="col-md-3">
+        <h5 class="text-uppercase mb-4 fw-bold">ENLACES</h5>
+        <p><a href="inicio.html" class="text-white text-decoration-none">Inicio</a></p>
+        <p><a href="equipo.html" class="text-white text-decoration-none">Nosotros</a></p>
+        <p><a href="mailto:info@queridakitty.org" class="text-white text-decoration-none">Contacto</a></p>
       </div>
-
-      <hr class="mb-4">
-
-      <div class="row align-items-center">
-        <div class="col-md-12 col-lg-12">
-          <p class="text-center">© All rights reserved 2019</p>
-        </div>
+      <div class="col-md-3">
+        <h5 class="text-uppercase mb-4 fw-bold">REDES SOCIALES</h5>
+        <a href="https://www.facebook.com/MuseodelaLibertad/?locale=es_LA" target="_blank" class="text-white me-4"><i class="fab fa-facebook fa-2x"></i></a>
+        <a href="https://x.com/museolibertaddh?lang=es" target="_blank" class="text-white me-4"><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="https://museodelalibertad.org/contacto/" target="_blank" class="text-white me-4"><i class="fab fa-whatsapp fa-2x"></i></a>
+        <a href="https://www.instagram.com/museodelalibertad/?hl=es" target="_blank" class="text-white me-4"><i class="fab fa-instagram fa-2x"></i></a>
+      </div>
+      <div class="col-md-6">
+        <h5 class="text-uppercase mb-4 fw-bold">CONTACTO</h5>
+        <p><i class="fas fa-phone me-2"></i> 647-754-0072</p>
+        <p><i class="fas fa-envelope me-2"></i> ...@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt me-2"></i> Panamá, Provincia de Panamá</p>
       </div>
     </div>
-  </footer>
-</html>
+    <hr class="mb-4">
+    <div class="row align-items-center"><div class="col-12"><p class="text-center m-0">© Fundación Democracia y Libertad. Amigas de Ana Frank. 2025</p></div></div>
+  </div>
+</footer>
 
+<!-- Audio de página -->
+<audio id="pageSound" src="page-flip-01a.mp3" preload="auto"></audio>
+
+</body>
 </html>

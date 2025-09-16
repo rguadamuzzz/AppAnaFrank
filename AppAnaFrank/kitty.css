@@ -1,0 +1,130 @@
+.navbar {
+  padding: 1rem 1.5rem;
+  border-radius: 40px;
+  margin: 15px auto;
+  width: 95%;
+  border: 1px solid #eadfd5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background-color: #f1e5cd !important;
+}
+
+
+:root{
+  --ink: var(--color-ink, #3d2f21);
+  --paper: #fff8ec;                 /* tono suave, sin imagen */
+  --border: var(--color-accent, #4b3b35);
+  --brand: var(--color-button, #7d523a);
+  --brand-strong: var(--color-hover, #5a3a2a);
+  --ok: #1f7a1f;
+  --ok-bg: #e8f6ea;
+  --bad: #b3261e;
+  --bad-bg: #fdebec;
+  --focus: 3px solid rgba(125, 82, 58, .35);
+}
+
+html, body{
+  height: 100%;
+}
+
+body{
+  font-family: 'Inter', sans-serif;
+  background: var(--paper) !important;
+  background-image: none !important;    /* anula la imagen del MiDiario.css */
+  color: var(--ink);
+}
+
+/* Tarjeta principal */
+.quiz-card{
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eadfd5;
+}
+
+.quiz-card .card-header{
+  background: #b3a396;
+  border-bottom: 1px solid #eadfd5;
+}
+
+.quiz-card .card-footer{
+  background: #faf6f2;
+  border-top: 1px solid #eadfd5;
+}
+
+/* Botón principal coherente con tu paleta */
+.btn-kitty{
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+.btn-kitty:hover{ background: var(--brand-strong); }
+.btn-kitty:focus-visible{ outline: var(--focus); }
+
+/* Opciones del quiz: claras, grandes, accesibles */
+.quiz-options{
+  display: grid;
+  gap: .85rem;
+}
+
+.quiz-option{
+  background: #fff;
+  border: 2px solid #e7ddd2;
+  border-radius: 14px;
+  padding: .95rem 1.1rem;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background-color .12s ease;
+  user-select: none;
+  line-height: 1.35;
+}
+.quiz-option:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+  border-color: #d5c6b8;
+}
+.quiz-option:focus-visible{
+  outline: var(--focus);
+}
+
+/* ESTADOS MUY CLAROS */
+.quiz-option.selected{
+  border-color: var(--brand);
+  background: #fbf1e9;               /* suave naranja/beige */
+  box-shadow: 0 0 0 5px rgba(125,82,58,.12);
+}
+
+.quiz-option.correct{
+  border-color: var(--ok);
+  background: var(--ok-bg);
+  color: #114d11;
+  box-shadow: 0 0 0 5px rgba(11, 135, 29, .15);
+}
+.quiz-option.incorrect{
+  border-color: var(--bad);
+  background: var(--bad-bg);
+  color: #77110d;
+  box-shadow: 0 0 0 5px rgba(179, 38, 30, .12);
+}
+
+/* Barra de progreso más “suave” */
+.progress{
+  background: #f0e6dc;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar{
+  background: linear-gradient(90deg, var(--brand) 0%, var(--brand-strong) 100%);
+}
+
+/* Badges/contador */
+.badge.bg-secondary-subtle{
+  background: #efe6dd !important;
+  border: 1px solid #e1d5ca;
+}
+
+/* Pequeños ajustes responsivos */
+@media (min-width: 768px){
+  .quiz-options{ grid-template-columns: 1fr; }
+}
