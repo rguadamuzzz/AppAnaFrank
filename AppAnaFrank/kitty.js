@@ -1,176 +1,129 @@
-// Preguntas y respuestas
-let questions = [
+const startBtn = document.getElementById("start-btn");
+const quizContainer = document.getElementById("quiz-container");
+const startScreen = document.getElementById("start-screen");
+const endScreen = document.getElementById("end-screen");
+const questionContainer = document.getElementById("question-container");
+const answerButtons = document.getElementById("answer-buttons");
+const nextBtn = document.getElementById("next-btn");
+const restartBtn = document.getElementById("restart-btn");
+const welcome = document.getElementById("welcome");
+const playerNameInput = document.getElementById("player-name");
+
+let currentQuestionIndex = 0;
+let shuffledQuestions = [];
+
+const questions = [
   {
-    question: "¿Cuál era el nombre completo de Ana Frank?",
-    options: ["Anna Margot Frank", "Annelies Marie Frank", "Edith Annelies Frank", "Ana Elisabeth Frank"],
-    answer: 1
+    question: "¿En qué país nació Ana Frank?",
+    answers: [
+      { text: "Alemania", correct: true },
+      { text: "Países Bajos", correct: false },
+      { text: "Polonia", correct: false }
+    ]
   },
   {
-    question: "¿En qué ciudad nació Ana Frank?",
-    options: ["Ámsterdam, Países Bajos", "Berlín, Alemania", "Frankfurt am Main, Alemania", "Aachen, Alemania"],
-    answer: 2
+    question: "¿Cómo se llama el diario de Ana Frank?",
+    answers: [
+      { text: "Mi diario secreto", correct: false },
+      { text: "El diario de Ana Frank", correct: true },
+      { text: "Memorias de una niña", correct: false }
+    ]
   },
   {
-    question: "¿Por qué la familia Frank se trasladó a Ámsterdam en 1933?",
-    options: [
-      "Porque Otto Frank tenía una beca de trabajo en los Países Bajos",
-      "Para huir de la persecución antijudía tras la llegada de Hitler al poder",
-      "Porque Edith Frank quería que sus hijas estudiaran en Holanda",
-      "Porque Margot recibió una oferta de trabajo en Ámsterdam"
-    ],
-    answer: 1
-  },
-  {
-    question: "¿Qué objeto recibió Ana el día de su decimotercer cumpleaños que marcó su vida?",
-    options: ["Una novela", "Una estrella de David", "Un diario", "Un pasaporte"],
-    answer: 2
-  },
-  {
-    question: "¿Dónde se escondió la familia Frank junto con otras personas?",
-    options: [
-      "En un campo de trabajo en Westerbork",
-      "En un departamento secreto detrás de las oficinas comerciales de Otto Frank",
-      "En la casa de los van Pels en Alemania",
-      "En la escuela judía de Ámsterdam"
-    ],
-    answer: 1
-  },
-  {
-    question: "¿Qué sucedió el 4 de agosto de 1944?",
-    options: [
-      "Los británicos liberaron el campo de Bergen-Belsen",
-      "Ana terminó de escribir su diario",
-      "La Gestapo descubrió el escondite de la familia Frank",
-      "Los Frank huyeron a Suiza"
-    ],
-    answer: 2
-  },
-  {
-    question: "¿En qué campo murieron Ana y su hermana Margot?",
-    options: ["Auschwitz", "Westerbork", "Bergen-Belsen", "Sobibor"],
-    answer: 2
-  },
-  {
-    question: "¿Quién fue el único sobreviviente del anexo secreto?",
-    options: ["Margot Frank", "Otto Frank", "Miep Gies", "Fritz Pfeffer"],
-    answer: 1
-  },
-  {
-    question: "¿Cuándo fue publicado el diario de Ana Frank por primera vez?",
-    options: ["1939", "1945", "1947", "1960"],
-    answer: 2
-  },
-  {
-    question: "¿Qué se convirtió en museo en 1960?",
-    options: [
-      "El campo de concentración de Bergen-Belsen",
-      "La casa donde nació Ana Frank en Frankfurt",
-      "El anexo secreto en la calle Prinsengracht 263",
-      "El campo de concentración de Auschwitz"
-    ],
-    answer: 2
+    question: "¿En qué ciudad se escondió Ana Frank?",
+    answers: [
+      { text: "Ámsterdam", correct: true },
+      { text: "Berlín", correct: false },
+      { text: "Varsovia", correct: false }
+    ]
   }
 ];
 
-// Variables
-let shuffledQuestions = [];
-let currentQuestionIndex = 0;
-let score = 0;
-let playerName = "";
-
-// Elementos del DOM
-const startContainer = document.getElementById("start-container");
-const quizContainer = document.getElementById("quiz-container");
-const resultContainer = document.getElementById("result-container");
-const greeting = document.getElementById("greeting");
-const questionElement = document.getElementById("question");
-const optionsElement = document.getElementById("options");
-const scoreElement = document.getElementById("score");
-const messageElement = document.getElementById("message");
-const startButton = document.getElementById("start-btn");
-
-// Mezclar arrays (para preguntas y opciones)
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
-
-// Iniciar juego
-startButton.addEventListener("click", () => {
-  const input = document.getElementById("player-name").value.trim();
-  if (!input) {
-    alert("Por favor, ingresa tu nombre");
+// Iniciar el juego
+startBtn.addEventListener("click", () => {
+  const playerName = playerNameInput.value.trim();
+  if (playerName === "") {
+    alert("Por favor ingresa tu nombre");
     return;
   }
-  playerName = input;
-
-  // 🔹 Ocultar pantalla inicial y mostrar preguntas
-  startContainer.classList.add("hidden");
-  quizContainer.classList.remove("hidden");
-
-  shuffledQuestions = shuffleArray([...questions]);
+  startScreen.style.display = "none";
+  quizContainer.style.display = "block";
+  welcome.innerText = `Bienvenido/a, ${playerName}`;
+  shuffledQuestions = [...questions];
   currentQuestionIndex = 0;
-  score = 0;
-  greeting.textContent = `¡Suerte, ${playerName}!`;
-  showQuestion();
+  setNextQuestion();
+});
+
+// Reiniciar juego
+restartBtn.addEventListener("click", () => {
+  endScreen.style.display = "none";
+  startScreen.style.display = "block";
+  playerNameInput.value = "";
 });
 
 // Mostrar pregunta
-function showQuestion() {
-  const q = shuffledQuestions[currentQuestionIndex];
-  questionElement.textContent = q.question;
-  optionsElement.innerHTML = "";
+function setNextQuestion() {
+  resetState();
+  showQuestion(shuffledQuestions[currentQuestionIndex]);
+}
 
-  let shuffledOptions = shuffleArray([...q.options]);
-
-  shuffledOptions.forEach(option => {
+function showQuestion(question) {
+  questionContainer.innerText = question.question;
+  question.answers.forEach(answer => {
     const button = document.createElement("button");
-    button.textContent = option;
-    button.onclick = () => selectAnswer(option, q);
-    optionsElement.appendChild(button);
+    button.innerText = answer.text;
+    button.classList.add("btn");
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    button.addEventListener("click", selectAnswer);
+    answerButtons.appendChild(button);
   });
 }
 
-// Seleccionar respuesta
-function selectAnswer(selected, q) {
-  const correctAnswer = q.options[q.answer];
-  const buttons = optionsElement.querySelectorAll("button");
+function resetState() {
+  nextBtn.style.display = "none";
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+}
 
-  buttons.forEach(btn => {
-    btn.disabled = true;
-    if (btn.textContent === correctAnswer) {
-      btn.classList.add("correct");
-    }
-    if (btn.textContent === selected && selected !== correctAnswer) {
-      btn.classList.add("wrong");
-    }
-  });
-
-  if (selected === correctAnswer) {
-    score += 10;
+function selectAnswer(e) {
+  const selectedButton = e.target;
+  const correct = selectedButton.dataset.correct === "true";
+  
+  if (correct) {
+    selectedButton.classList.add("correct");
+  } else {
+    selectedButton.classList.add("incorrect");
+    // Mostrar la respuesta correcta
+    Array.from(answerButtons.children).forEach(button => {
+      if (button.dataset.correct === "true") {
+        button.classList.add("correct");
+      }
+    });
   }
 
-  setTimeout(nextQuestion, 1200);
+  // Desactivar botones
+  Array.from(answerButtons.children).forEach(button => {
+    button.disabled = true;
+  });
+
+  if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    nextBtn.style.display = "block";
+  } else {
+    nextBtn.innerText = "Terminar";
+    nextBtn.style.display = "block";
+  }
 }
 
-// Siguiente pregunta
-function nextQuestion() {
+nextBtn.addEventListener("click", () => {
   currentQuestionIndex++;
   if (currentQuestionIndex < shuffledQuestions.length) {
-    showQuestion();
+    setNextQuestion();
   } else {
-    endQuiz();
+    quizContainer.style.display = "none";
+    endScreen.style.display = "block";
+    nextBtn.innerText = "Siguiente";
   }
-}
-
-// Terminar juego
-function endQuiz() {
-  quizContainer.classList.add("hidden");
-  resultContainer.classList.remove("hidden");
-  scoreElement.textContent = `${playerName}, tu puntaje final es: ${score}`;
-  messageElement.textContent =
-    score >= 80
-      ? "¡Excelente trabajo! 🌟"
-      : score >= 50
-      ? "¡Muy bien! Sigue aprendiendo 📚"
-      : "¡No te rindas! Intenta de nuevo 💪";
-}
+});
