@@ -1,3 +1,13 @@
+.navbar {
+  padding: 1rem 1.5rem;
+  border-radius: 40px;
+  margin: 15px auto;
+  width: 95%;
+  border: 1px solid #eadfd5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background-color: #f1e5cd !important;
+}
+
 :root {
     /* Colores basados en el tema de diario de época */
     --color-ink: #3d2f21;         /* Tinta marrón oscura */

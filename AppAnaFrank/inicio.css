@@ -1,95 +1,175 @@
-body {
-  background-color: #fff8ea !important;
-  font-family: Arial, sans-serif;
+/* ====== Base ====== */
+:root{
+  --ink: #3d2f21;
+  --paper: #fff8ec;
+  --border: #e6dacb;
+  --brand: #7d523a;       /* mismo tono que Kitty */
+  --brand-strong: #5a3a2a;
+  --accent-soft: #f5ece4;
+  --accent-soft-2: #faf6f2;
 }
 
+/* Fondo sólido, sin imagen, tipografía limpia */
+body {
+  background-color: var(--paper) !important;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ====== Navbar (suave, redondeada, sombra ligera) ====== */
 .navbar {
-  padding: 2.5rem 2.5rem;      
-  border-radius: 40px;      
-  margin: 15px auto;      
-  width: 95%;               
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 40px;
+  margin: 15px auto;
+  width: 95%;
+  border: 1px solid #eadfd5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   background-color: #f1e5cd !important;
 }
 
 .navbar-nav .nav-link {
-  margin: 2px 40px;        
-  font-size: 1.3rem;      
-  font-weight: 500;     
+  margin: 2px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #5a3a2a !important;
 }
 
+.navbar-brand {
+  font-weight: 800;
+  color: #5a3a2a !important;
+  letter-spacing: .2px;
+}
+
+/* ====== Secciones (manteniendo divisiones de Paola) ====== */
+/* Agrega class="section-card" al contenedor interno de cada sección */
+.section {
+  padding: 70px 0;
+}
+
+.section:nth-child(even) {
+  background: transparent; /* quitamos el bloque amarillo para un look más uniforme */
+}
+
+/* Tarjeta suave tipo Kitty */
+.section-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  box-shadow: 0 8px 18px rgba(0,0,0,.06);
+}
+
+/* Layout interno (mantén tus columnas) */
+.img-fluid {
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+}
+
+.text-block {
+  padding: 10px 0 0 0;  /* más aire vertical */
+  color: var(--ink) !important;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  color: #652a2a;
+  letter-spacing: .2px;
+}
+
+h2 { font-size: clamp(1.3rem, 2.2vw, 1.75rem); }
+p  { color: #4a3b33; }
+
+/* ====== Botones coherentes con Kitty ====== */
+.btn-kitty {
+  background: var(--brand);
+  color: #fff !important;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+
+.btn-kitty:hover {
+  background: var(--brand-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0,0,0,.10);
+}
+
+/* Por si quieres conservar tu botón anterior como variante secundaria */
+.btn-conocenos{
+  background: var(--brand);
+  color: #fff;
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  font-weight: 700;
+}
+.btn-conocenos:hover{ background: var(--brand-strong); }
+
+/* ====== Hero (si mantienes el bloque) ====== */
 .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 80px 10%;
+  gap: 28px;
+  padding: 64px 5%;
 }
+.hero-text { max-width: 560px; }
+.hero-text h1 { font-size: clamp(1.8rem, 4.2vw, 3rem); color: #111; }
+.hero-text p  { margin-top: 14px; font-size: 1.05rem; color: #4a3b33; }
+.hero-img img { max-width: 340px; height: auto; border-radius: 16px; }
 
-.hero-text {
-  max-width: 50%;
-}
-
-.hero-text h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #111;
-}
-
-.hero-text p {
-  margin-top: 20px;
-  font-size: 1.1rem;
-  color: #444;
-}
-
-.btn-conocenos {
-  margin-top: 25px;
-  padding: 10px 25px;
-  border-radius: 20px;
-  background-color: #b23b2d;
-  color: white;
-  border: none;
-}
-
-.btn-conocenos:hover {
-  background-color: #922f23;
-}
-
-.hero-img img {
-  max-width: 300px;
-  height: auto;
-}
-
+/* ====== Footer pulido ====== */
 footer {
-  background-color: #111;
-  color: #ffffff;
-  padding: 40px 20px;
+  background: #111;
+  color: #fff;
+  padding: 48px 20px;
+  border-top: 4px solid #2c2c2c;
+}
+
+footer h5 {
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
 footer a {
   text-decoration: none;
-  color: #ccc;
+  color: #ddd;
 }
-
-footer a:hover {
-  color: #ff99c8;
-}
+footer a:hover { color: #ffb0b0; }
 
 .social-icons a {
-  margin-right: 15px;
+  margin-right: 14px;
   font-size: 20px;
   color: #ccc;
-  transition: 0.3s;
+  transition: .2s;
 }
+.social-icons a:hover { color: #ffb0b0; }
 
-.social-icons a:hover {
-  color: #ff99c8;
+.footer-divider {
+  border-top: 1px solid #2a2a2a;
+  margin: 24px 0;
 }
-
 .footer-bottom {
-  background-color: #222;
+  background: #1a1a1a;
   color: #bbb;
   text-align: center;
-  padding: 15px 0;
-  margin-top: 20px;
+  padding: 14px 0;
+  margin-top: 12px;
   font-size: 14px;
+}
+
+/* ====== Responsivo ====== */
+@media (max-width: 991px){
+  .navbar { width: calc(100% - 20px); }
+  .navbar-nav .nav-link { margin: 6px 12px; }
+  .hero { flex-direction: column; text-align: center; }
+  .hero-text { max-width: 100%; }
+  .hero-img img { max-width: 280px; }
 }

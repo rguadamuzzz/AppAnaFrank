@@ -1,0 +1,41 @@
+/* ================== PALETA ================== */
+:root {
+  --bg-light: #fffbea;
+  --accent-red: #872a1f;
+  --accent-darkred: #521a11;
+  --accent-yellow: #996a3e;
+  --accent-pink: #dabdb9;
+  --container-bg: #f1e5cd;
+  --text-dark: #2c2c2c;
+  --text-medium: #444;
+  --list-bg: #fdfdfd;
+  --border-color: #872a1f;
+  --placeholder-color: #dabdb9;
+}
+
+/* Fondo general */
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--bg-light);
+  margin: 0;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenedor principal */
+.quienes-somos {
+  background: linear-gradient(135deg, var(--container-bg), var(--accent-pink));
+  border-radius: 20px;
+  padding: 50px 40px;
+  width: 90%;
+  max-width: 1100px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border: 3px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.quienes-somos:hover {
+  transform: translateY(-6px);
+}
